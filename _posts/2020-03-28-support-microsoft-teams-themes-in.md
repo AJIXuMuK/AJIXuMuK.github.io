@@ -85,7 +85,6 @@ SDK contains a handler <span class="code">registerOnThemeChangeHandler</span> th
 theme is changed.<br />Team's <span class="code">context</span> also contains <span class="code">theme</span> property
 that shows the current theme: default, dark, or contrast.<br />Knowing that, we can use the next code to handle the
 theming:
-<div markdown="1">
 ```typescript
 protected async onInit(): Promise<void> {
     if (this.context.sdks.microsoftTeams) { 
@@ -99,7 +98,6 @@ private _applyTheme = (theme: string): void => {
     this.context.domElement.setAttribute('data-theme', theme);
     document.body.setAttribute('data-theme', theme);
 ```
-</div>
 So, during the initialization, and whenever the theme is changed we are setting <span class="code">data-theme</span>
 attribute of document's body to the selected <span class="code">theme</span>. <h3>Why data attribute on body?</h3>You
 may ask why are we setting data attribute? And why on body, not the web part's root DOM element?<br />There are multiple
