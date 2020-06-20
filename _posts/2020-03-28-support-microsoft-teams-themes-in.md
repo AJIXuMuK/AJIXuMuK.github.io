@@ -45,7 +45,6 @@ result, you have a project structure like:<br /><a
         src="https://1.bp.blogspot.com/-EjL9kCrCcpM/Xn6M8_KoliI/AAAAAAAABj8/XV-E0e98grAT1t0wJbXqNSw1h6aPPyHxQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B4.31.40%2BPM.png"
         data-original-width="618" data-original-height="620" width="700" /></a><br />And inside your SCSS you can have
 something like:
-<div markdown="1">
 ```scss
     .firstComponent {
         background: "[theme:white, default:#fff]";
@@ -57,7 +56,6 @@ something like:
         }
     }
 ```
-</div>
 And it will look always good in SharePoint:<br /><a
     href="https://2.bp.blogspot.com/-AidCxv_l1Zo/Xn6RppK8hOI/AAAAAAAABkU/-xXdtkKihqoSdGQz_KHz5byPD-8CGsVdQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B4.51.37%2BPM.png"
     imageanchor="1"><img border="0"
