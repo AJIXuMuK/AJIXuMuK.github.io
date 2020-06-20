@@ -61,7 +61,6 @@ permalink: /:title
 
 lsi: false
 safe: true
-source: https://github.com/AJIXuMuK/AJIXuMuK.github.io.git
 incremental: false
 highlighter: rouge
 gist:
