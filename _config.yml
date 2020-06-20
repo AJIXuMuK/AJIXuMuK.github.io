@@ -62,6 +62,7 @@ permalink: /:title
 lsi: false
 safe: true
 incremental: false
+markdown: GFM
 highlighter: rouge
 gist:
   noscript: false
