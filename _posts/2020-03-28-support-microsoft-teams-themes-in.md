@@ -45,7 +45,8 @@ result, you have a project structure like:<br /><a
         src="https://1.bp.blogspot.com/-EjL9kCrCcpM/Xn6M8_KoliI/AAAAAAAABj8/XV-E0e98grAT1t0wJbXqNSw1h6aPPyHxQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B4.31.40%2BPM.png"
         data-original-width="618" data-original-height="620" width="700" /></a><br />And inside your SCSS you can have
 something like:
-```scss
+<div markdown="1">
+{% highlight css %}
     .firstComponent {
         background: "[theme:white, default:#fff]";
         color: "[theme:primaryText, default:#333]";
@@ -55,7 +56,8 @@ something like:
             color: "[theme:white, default:#fff]";
         }
     }
-```
+{% endhighlight %}
+</div>
 And it will look always good in SharePoint:<br /><a
     href="https://2.bp.blogspot.com/-AidCxv_l1Zo/Xn6RppK8hOI/AAAAAAAABkU/-xXdtkKihqoSdGQz_KHz5byPD-8CGsVdQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B4.51.37%2BPM.png"
     imageanchor="1"><img border="0"
@@ -83,8 +85,9 @@ SDK contains a handler <span class="code">registerOnThemeChangeHandler</span> th
 theme is changed.<br />Team's <span class="code">context</span> also contains <span class="code">theme</span> property
 that shows the current theme: default, dark, or contrast.<br />Knowing that, we can use the next code to handle the
 theming:
-```typescript
-protected async onInit(): Promise<void> {
+<div markdown="1">
+{% highlight typescript %}
+protected async onInit(): Promise&lt;void&gt; {
     if (this.context.sdks.microsoftTeams) { 
         // checking that we're in Teams
         const context = this.context.sdks.microsoftTeams!.context;
@@ -92,10 +95,11 @@ protected async onInit(): Promise<void> {
         this.context.sdks.microsoftTeams.teamsJs.registerOnThemeChangeHandler(this._applyTheme);
     }
 }
-private _applyTheme = (theme: string): void => {
+private _applyTheme = (theme: string): void =&gt; {
     this.context.domElement.setAttribute('data-theme', theme);
     document.body.setAttribute('data-theme', theme);
-```
+    {% endhighlight %}
+</div>
 So, during the initialization, and whenever the theme is changed we are setting <span class="code">data-theme</span>
 attribute of document's body to the selected <span class="code">theme</span>. <h3>Why data attribute on body?</h3>You
 may ask why are we setting data attribute? And why on body, not the web part's root DOM element?<br />There are multiple

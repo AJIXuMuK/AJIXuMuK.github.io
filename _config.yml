@@ -72,3 +72,4 @@ kramdown:
   input: GFM
   hard_wrap: false
   extensions: fenced_code_blocks
+  css_class: 'highlight'
