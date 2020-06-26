@@ -86,7 +86,7 @@ theme is changed.<br />Team's <span class="code">context</span> also contains <s
 that shows the current theme: default, dark, or contrast.<br />Knowing that, we can use the next code to handle the
 theming:
 <div markdown="1">
-{% highlight typescript %}
+{% highlight ts %}
 protected async onInit(): Promise&lt;void&gt; {
     if (this.context.sdks.microsoftTeams) { 
         // checking that we're in Teams
