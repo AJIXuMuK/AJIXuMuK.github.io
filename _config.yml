@@ -62,8 +62,5 @@ permalink: /:title
 lsi: false
 safe: true
 incremental: false
-markdown: kramdown
-kramdown:
-  syntax_highlighter: rouge
-  input: GFM
-  #css_class: 'highlight'
+markdown: GFM
+highlighter: rouge
