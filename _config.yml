@@ -1,5 +1,6 @@
 # Site setings
 name: 'Alex Terentiev'
+title: 'Alex Terentiev'
 description: 'OFfice Dev MVP'
 meta_description: 'Jekyll template, minimal style, perfect for bloggers.'
 logo:
@@ -39,10 +40,8 @@ navigation:
     url: /
   - text: About
     url: /about
-  - text: Style Guide
-    url: /style-guide
-  - text: Contact Me
-    url: /contact
+  #- text: Contact Me
+  #  url: /contact
   - text: Search
     url: /search
 

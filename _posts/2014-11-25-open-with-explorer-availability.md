@@ -25,8 +25,7 @@ ScriptManager.RegisterStartupScript(this, this.GetType(), "CheckOpenInExplorerAv
 var displayOpenInExp = SupportsNavigateHttpFolder() ? 'block' : 'none';   
 var elOpenInExp = document.getElementById('" + controlId + @"');   
 elOpenInExp.style.display = displayOpenInExp;  
-</script>", false);  
-
+</script>", false);
 {% endhighlight %}
 </div>
 or on the client (here I'm using jquery):<br />

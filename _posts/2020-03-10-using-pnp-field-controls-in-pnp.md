@@ -21,9 +21,8 @@ tags:
 modified_time: '2020-03-10T08:20:57.165-07:00'
 thumbnail: https://4.bp.blogspot.com/-oVXtgOckIaE/XmcDbe4kVZI/AAAAAAAABiA/nDIr-ArZvJ8tqpfcZaeCb2I6jdg6w4koQCLcBGAsYHQ/s72-c/list-items.png
 blogger_id: tag:blogger.com,1999:blog-3066084330774405472.post-1077381746766294427
-blogger_orig_url: http://blog.aterentiev.com/2020/03/using-pnp-field-controls-in-pnp.html
+blogger_orig_url: http://blog.aterentiev.com/2020/03/using-pnp-field-co
 ---
-
 This blog post is based on <a href="https://github.com/SharePoint/sp-dev-fx-webparts/tree/dev/samples/react-pnp-controls-list-view-fields" target="_blank">SPFx web part sample</a> that shows how to use <a href="https://sharepoint.github.io/sp-dev-fx-controls-react/controls/fields/main/" target="_blank">PnP Field Controls</a> to render different types of SharePoint columns in <a href="https://sharepoint.github.io/sp-dev-fx-controls-react/controls/ListView/" target="_blank">ListView</a> control.<br /><a name='more'></a><h2>Objective</h2>Let's say we have a SharePoint list with such columns as Lookup, Choice, Hyperlink or Picture, etc. And we want to display items from this list in our SPFx web part.<br />In this blog post I will use the list as shown below:<br /><a href="https://4.bp.blogspot.com/-oVXtgOckIaE/XmcDbe4kVZI/AAAAAAAABiA/nDIr-ArZvJ8tqpfcZaeCb2I6jdg6w4koQCLcBGAsYHQ/s1600/list-items.png" imageanchor="1"><img border="0" data-original-height="397" data-original-width="1600" src="https://4.bp.blogspot.com/-oVXtgOckIaE/XmcDbe4kVZI/AAAAAAAABiA/nDIr-ArZvJ8tqpfcZaeCb2I6jdg6w4koQCLcBGAsYHQ/s1600/list-items.png" width="600" /></a><a href="https://2.bp.blogspot.com/-lLjLhaSCGXU/XmcDepAnbbI/AAAAAAAABiE/_nDgUF3ZieA83wsn_AztXKGygxnQfFpBgCLcBGAsYHQ/s1600/list-cols.png" imageanchor="1"><img border="0" data-original-height="698" data-original-width="1548" src="https://2.bp.blogspot.com/-lLjLhaSCGXU/XmcDepAnbbI/AAAAAAAABiE/_nDgUF3ZieA83wsn_AztXKGygxnQfFpBgCLcBGAsYHQ/s1600/list-cols.png" width="600" /></a><br />We want to display this list in our web part similarly to the OOTB rendering.<br /><h2>Getting the Items</h2>First thing to do - we need to request the list items from SharePoint.<br />There are several way how you can do that: <br /><ul><li>Using SharePoint REST API</li><li>Using Microsoft Graph</li><li>Using PnPJS library</li></ul>I will use PnPJS. And to be more precise: <span class="code">getItemsByCAMLQuery</span> method of <span class="code">IList</span> object. This method allows to correctly get labels for Managed Metadata columns (selected terms). And this is required for the selected list. So, let's install PnPJS module to our project: <br />
 <div markdown="1">
 {% highlight console %}
@@ -45,7 +44,7 @@ And let's request the items in web part's <span class="code">onInit</span> metho
 <div markdown="1">
 {% highlight typescript %}
 private _items: any[];
-protected async onInit(): Promise<void> {
+protected async onInit(): Promise&lt;void&gt; {
   await super.onInit();
 
   sp.setup({
@@ -59,9 +58,9 @@ protected async onInit(): Promise<void> {
   });
 
   // getting lookup values by ids
-  this._items.forEach(item => {
+  this._items.forEach(item =&gt; {
     const visitedCountriesIds: number[] = item['VisitedCountriesId'] as number[];
-    item['VisitedCountries'] = countries.filter(c => visitedCountriesIds.indexOf(c['ID']) !== -1).map(c => c['Title']);
+    item['VisitedCountries'] = countries.filter(c =&gt; visitedCountriesIds.indexOf(c['ID']) !== -1).map(c =&gt; c['Title']);
   });
 
 }
@@ -145,17 +144,17 @@ For Title and Experience (Choice) we will use simple <span class="code">FieldTex
 <div markdown="1">
 {% highlight typescript %}
 private _renderTitle(item?: any): any {
-  return <FieldTextRenderer
+  return &lt;FieldTextRenderer
     text={item.Title}
-  />;
+  /&gt;;
 }
 
 private _renderExperience(item?: any): any {
   const experience = item['Expirience'];
 
-  return <FieldTextRenderer
+  return &lt;FieldTextRenderer
     text={experience}
-  />;
+  /&gt;;
 }
 
 {% endhighlight %}
@@ -165,8 +164,8 @@ For date - <span class="code">FieldDateRenderer</span>: <br />
 {% highlight typescript %}
 private _renderDate(item?: any): any {
   const date = new Date(item['JourneyDate']);
-  return <FieldDateRenderer
-    text={date.toLocaleDateString()} />;
+  return &lt;FieldDateRenderer
+    text={date.toLocaleDateString()} /&gt;;
 }
 
 {% endhighlight %}
@@ -176,11 +175,11 @@ For the Picture (Hyperlink or Picture) we need to get 2 properties of the flatte
 {% highlight typescript %}
 private _renderPicture(item?: any): any {
 
-  return <FieldUrlRenderer
+  return &lt;FieldUrlRenderer
     url={item['Picture.Url']}
     isImageUrl={true}
     className={styles.image}
-    text={item['Picture.Description'] || ''} />;
+    text={item['Picture.Description'] || ''} /&gt;;
 }
 
 {% endhighlight %}
@@ -190,11 +189,11 @@ Similarly, for JorneyType (Managed Metadata) we need <span class="" code="">Jour
 {% highlight typescript %}
 private _renderJourneyType(item?: any) {
 
-  return <FieldTaxonomyRenderer
+  return &lt;FieldTaxonomyRenderer
     terms={[{
       Label: item['JourneyType.Label'],
       TermID: item['JourneyType.TermGuid']
-    }]} />;
+    }]} /&gt;;
   }
 
 {% endhighlight %}
@@ -212,20 +211,20 @@ private _renderCountries(item?: any, index?: number): any {
   const visitedCountriesIds = originalItem['VisitedCountriesId'];
   const visitedCountries = originalItem['VisitedCountries'];
 
-  const lookups: ISPFieldLookupValue[] = visitedCountries.map((vc, idx) => {
+  const lookups: ISPFieldLookupValue[] = visitedCountries.map((vc, idx) =&gt; {
     return {
       lookupId: visitedCountriesIds[idx].toString(),
       lookupValue: vc
     };
   });
 
-    return <FieldLookupRenderer
+    return &lt;FieldLookupRenderer
       lookups={lookups}
-      onClick={args => {
+      onClick={args =&gt; {
         this.setState({
           selectedLookupId: args.lookup.lookupId
         });
-      }} />;
+      }} /&gt;;
   }
 
 {% endhighlight %}
@@ -236,13 +235,13 @@ And if <span class="code">selectedLookupId</span> is set, we'll use one more PnP
 import { IFrameDialog } from '@pnp/spfx-controls-react/lib/IFrameDialog';
 import { DialogType } from 'office-ui-fabric-react/lib/Dialog';
 //...
-public render(): React.ReactElement<IPnPListViewProps> {
+public render(): React.ReactElement&lt;IPnPListViewProps&gt; {
 //...
 {this.state.selectedLookupId &amp;&amp;
-  <IFrameDialog
+  &lt;IFrameDialog
     hidden={false}
     url={`${this.props.context.pageContext.web.absoluteUrl}${this._lookupFieldDispWebRelativeUrl.replace('{0}', this.state.selectedLookupId.toString())}`}
-    iframeOnLoad={iframe => {
+    iframeOnLoad={iframe =&gt; {
       const iframeWindow: Window = iframe.contentWindow;
       const iframeDocument: Document = iframeWindow.document;
 
@@ -251,7 +250,7 @@ public render(): React.ReactElement<IPnPListViewProps> {
 
       s4Workspace.scrollIntoView();
     }}
-    onDismiss={() => {
+    onDismiss={() =&gt; {
       this.setState({
         selectedLookupId: undefined
       });
@@ -264,7 +263,7 @@ public render(): React.ReactElement<IPnPListViewProps> {
       showCloseButton: true
     }}
     width={'570px'}
-    height={'250px'} />}
+    height={'250px'} /&gt;}
 //...
 }
 
@@ -273,7 +272,7 @@ public render(): React.ReactElement<IPnPListViewProps> {
 The constructed <span class="code">url</span> parameter will look like that: <span class="code">https://tenant.sharepoint.com/sites/your-site/Lists/Journeys/DispForm.aspx?ID=item-id&amp;IsDlg=1</span><br />The final code of the component: <br />
 <div markdown="1">
 {% highlight typescript %}
-export default class PnPListView extends React.Component<IPnPListViewProps, IPnPListViewState> {
+export default class PnPListView extends React.Component&lt;IPnPListViewProps, IPnPListViewState&gt; {
 
   private readonly _countriesLookupFieldId = '5e037cea-aaef-40dd-895f-90442114016f';
   private readonly _lookupFieldDispWebRelativeUrl = '/Lists/Country/DispForm.aspx?ID={0}&amp;RootFolder=*&amp;IsDlg=1';
@@ -292,7 +291,7 @@ export default class PnPListView extends React.Component<IPnPListViewProps, IPnP
     name: 'VisitedCountries',
     displayName: 'Visited Countries',
     minWidth: 100,
-    render: (item, index) => { return this._renderCountries(item, index); }
+    render: (item, index) =&gt; { return this._renderCountries(item, index); }
   }, {
     name: 'Experience',
     displayName: 'Experience',
@@ -317,15 +316,15 @@ export default class PnPListView extends React.Component<IPnPListViewProps, IPnP
   }
 
 
-  public render(): React.ReactElement<IPnPListViewProps> {
+  public render(): React.ReactElement&lt;IPnPListViewProps&gt; {
     return (
-      <div className={styles.pnPListView}>
-        <ListView items={this.props.items} viewFields={this._fields} />
+      &lt;div className={styles.pnPListView}&gt;
+        &lt;ListView items={this.props.items} viewFields={this._fields} /&gt;
         {this.state.selectedLookupId &amp;&amp;
-          <IFrameDialog
+          &lt;IFrameDialog
             hidden={false}
             url={`${this.props.context.pageContext.web.absoluteUrl}${this._lookupFieldDispWebRelativeUrl.replace('{0}', this.state.selectedLookupId.toString())}`}
-            iframeOnLoad={iframe => {
+            iframeOnLoad={iframe =&gt; {
               const iframeWindow: Window = iframe.contentWindow;
               const iframeDocument: Document = iframeWindow.document;
 
@@ -334,7 +333,7 @@ export default class PnPListView extends React.Component<IPnPListViewProps, IPnP
 
               s4Workspace.scrollIntoView();
             }}
-            onDismiss={() => {
+            onDismiss={() =&gt; {
               this.setState({
                 selectedLookupId: undefined
               });
@@ -347,8 +346,8 @@ export default class PnPListView extends React.Component<IPnPListViewProps, IPnP
               showCloseButton: true
             }}
             width={'570px'}
-            height={'250px'} />}
-      </div>
+            height={'250px'} /&gt;}
+      &lt;/div&gt;
     );
   }
 
@@ -357,9 +356,9 @@ export default class PnPListView extends React.Component<IPnPListViewProps, IPnP
    * @param item ListView item
    */
   private _renderTitle(item?: any): any {
-    return <FieldTextRenderer
+    return &lt;FieldTextRenderer
       text={item.Title}
-    />;
+    /&gt;;
   }
 
   /**
@@ -368,8 +367,8 @@ export default class PnPListView extends React.Component<IPnPListViewProps, IPnP
    */
   private _renderDate(item?: any): any {
     const date = new Date(item['JourneyDate']);
-    return <FieldDateRenderer
-      text={date.toLocaleDateString()} />;
+    return &lt;FieldDateRenderer
+      text={date.toLocaleDateString()} /&gt;;
   }
 
   /**
@@ -387,20 +386,20 @@ export default class PnPListView extends React.Component<IPnPListViewProps, IPnP
     const visitedCountriesIds = originalItem['VisitedCountriesId'];
     const visitedCountries = originalItem['VisitedCountries'];
 
-    const lookups: ISPFieldLookupValue[] = visitedCountries.map((vc, idx) => {
+    const lookups: ISPFieldLookupValue[] = visitedCountries.map((vc, idx) =&gt; {
       return {
         lookupId: visitedCountriesIds[idx].toString(),
         lookupValue: vc
       };
     });
 
-    return <FieldLookupRenderer
+    return &lt;FieldLookupRenderer
       lookups={lookups}
-      onClick={args => {
+      onClick={args =&gt; {
         this.setState({
           selectedLookupId: args.lookup.lookupId
         });
-      }} />;
+      }} /&gt;;
   }
 
   /**
@@ -410,9 +409,9 @@ export default class PnPListView extends React.Component<IPnPListViewProps, IPnP
   private _renderExperience(item?: any): any {
     const experience: string = item['Expirience'];
 
-    return <FieldTextRenderer
+    return &lt;FieldTextRenderer
       text={experience}
-    />;
+    /&gt;;
   }
 
   /**
@@ -421,11 +420,11 @@ export default class PnPListView extends React.Component<IPnPListViewProps, IPnP
    */
   private _renderPicture(item?: any): any {
 
-    return <FieldUrlRenderer
+    return &lt;FieldUrlRenderer
       url={item['Picture.Url']}
       isImageUrl={true}
       className={styles.image}
-      text={item['Picture.Description'] || ''} />;
+      text={item['Picture.Description'] || ''} /&gt;;
   }
 
   /**
@@ -434,14 +433,14 @@ export default class PnPListView extends React.Component<IPnPListViewProps, IPnP
    */
   private _renderJourneyType(item?: any) {
 
-    return <FieldTaxonomyRenderer
+    return &lt;FieldTaxonomyRenderer
       terms={[{
         Label: item['JourneyType.Label'],
         TermID: item['JourneyType.TermGuid']
-      }]} />;
+      }]} /&gt;;
   }
 }
 
 {% endhighlight %}
 </div>
-And this is how our list will look:<br /><a href="https://1.bp.blogspot.com/-S9laC1T4cd4/XmcX-Z4Jb0I/AAAAAAAABik/G3RZolr0-AIbVefrIRg9R17hli9r7zBCACLcBGAsYHQ/s1600/web-part.png" imageanchor="1"><img border="0" data-original-height="550" data-original-width="1600" src="https://1.bp.blogspot.com/-S9laC1T4cd4/XmcX-Z4Jb0I/AAAAAAAABik/G3RZolr0-AIbVefrIRg9R17hli9r7zBCACLcBGAsYHQ/s1600/web-part.png" width="600" /></a><br />And lookup popup:<br /><a href="https://2.bp.blogspot.com/-As8DWrFCyRU/XmcYZNLq5JI/AAAAAAAABis/qTIf-RccuLEEbG-8KSi9WQs1SQAlMYgiACLcBGAsYHQ/s1600/popup.png" imageanchor="1"><img border="0" data-original-height="688" data-original-width="1600" src="https://2.bp.blogspot.com/-As8DWrFCyRU/XmcYZNLq5JI/AAAAAAAABis/qTIf-RccuLEEbG-8KSi9WQs1SQAlMYgiACLcBGAsYHQ/s1600/popup.png" width="600" /></a><br /><h2>Conclusion</h2>As you can see it's pretty easy to combine different PnP Reusable Controls to work together. Using the same technique you can render other SharePoint column types like People or Group, multiline text, and others.<br />As mentioned in the beginning of the post, you can find all the code <a href="https://github.com/SharePoint/sp-dev-fx-webparts/tree/dev/samples/react-pnp-controls-list-view-fields" target="_blank">here</a><br /><br /><br />That's all for today!<br />Have fun!
+And this is how our list will look:<br /><a href="https://1.bp.blogspot.com/-S9laC1T4cd4/XmcX-Z4Jb0I/AAAAAAAABik/G3RZolr0-AIbVefrIRg9R17hli9r7zBCACLcBGAsYHQ/s1600/web-part.png" imageanchor="1"><img border="0" data-original-height="550" data-original-width="1600" src="https://1.bp.blogspot.com/-S9laC1T4cd4/XmcX-Z4Jb0I/AAAAAAAABik/G3RZolr0-AIbVefrIRg9R17hli9r7zBCACLcBGAsYHQ/s1600/web-part.png" width="600" /></a><br />And lookup popup:<br /><a href="https://2.bp.blogspot.com/-As8DWrFCyRU/XmcYZNLq5JI/AAAAAAAABis/qTIf-RccuLEEbG-8KSi9WQs1SQAlMYgiACLcBGAsYHQ/s1600/popup.png" imageanchor="1"><img border="0" data-original-height="688" data-original-width="1600" src="https://2.bp.blogspot.com/-As8DWrFCyRU/XmcYZNLq5JI/AAAAAAAABis/qTIf-RccuLEEbG-8KSi9WQs1SQAlMYgiACLcBGAsYHQ/s1600/popup.png" width="600" /></a><br /><h2>Conclusion</h2>As you can see it's pretty easy to combine different PnP Reusable Controls to work together. Using the same technique you can render other SharePoint column types like People or Group, multiline text, and others.<br />As mentioned in the beginning of the post, you can find all the code <a href="https://github.com/SharePoint/sp-dev-fx-webparts/tree/dev/samples/react-pnp-controls-list-view-fields" target="_blank">here</a><br /><br /><br />That's all for today!<br />Have fun! for today!<br />Have fun!
