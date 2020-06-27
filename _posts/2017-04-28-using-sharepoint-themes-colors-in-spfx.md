@@ -1,0 +1,37 @@
+---
+layout: post
+title: Using SharePoint Themes colors in SPFx Client Side Web Parts
+date: '2017-04-28T09:07:00.000-07:00'
+author: Alex Terentiev
+tags:
+- SharePoint Online
+- SharePoint UI
+- Client Side Web Part
+- SPFx
+- O365
+- SharePoint Framework
+- Office 365
+modified_time: '2017-05-20T16:21:31.642-07:00'
+blogger_id: tag:blogger.com,1999:blog-3066084330774405472.post-4000996928407654245
+blogger_orig_url: http://blog.aterentiev.com/2017/04/using-sharepoint-themes-colors-in-spfx.html
+---
+
+Often you can have a task where your custom web part style (colors, backgrounds) should change to fit current selected SharePoint Theme (Site Settings -&gt; Change the look).<br />I have good news for you - it's really simple to implement in SPFx Client Side Web Part<br /><br /><a name='more'></a>It turns out that SPFx has out of the box 'Themes loader' that is loaded to all Modern Pages by default. And this loader can replace SASS variables of specific format with values from current theme.<br />All existing theme properties can be found in <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">window</span>&nbsp;object:<br />
+<div markdown="1">
+{% highlight javascript %}
+window.__themeState__.theme
+
+{% endhighlight %}
+</div>
+After you decided what properties of theme you need you can use them in your .scss files like that:<br />
+<div markdown="1">
+{% highlight css %}
+$yourVar: "[theme:primaryBackground, default: #fff]";
+
+.someStyle {
+background: $yourVar;
+}
+
+{% endhighlight %}
+</div>
+Here we're initializing a SASS variable (<a href="http://sass-lang.com/guide" target="_blank">SASS guidance</a>) with a specific value that can be parsed by themes loader:<br /><ul><li>theme:primaryBackground shows what variable from theme to use</li><li>default shows what value to use if the theme variable is not set (for example, default Office theme has very few variables that are set)</li></ul><div>Then we're using our custom variable in css class.</div><div>And that's it.</div><div>You can get working web part example from&nbsp;<a href="https://github.com/AJIXuMuK/sp-dev-fx-webparts/tree/dev/samples/react-themes" target="_blank">GitHub</a>&nbsp;and presentation slides from SharePoint PnP community call from&nbsp;<a href="https://doc.co/G4xSqf" target="_blank">Docs.com</a></div><div><br /><b>UPDATE 05/20/2017</b><br />I've decided to list all the theme's properties here and start to collect information what property is responsible for what elements of the UI as I didn't find any documentation on that.</div><br /><table id="vars" cellpadding="0" cellspacing="0"><thead><tr><th>Name</th><th>Elements on Modern Page</th></tr></thead><tbody><tr><td>backgroundOverlay</td><td><ul><li>overlay that is applied to page header (part with page title and large background image)</li></ul></td></tr><tr><td>primaryBackground</td><td><ul><li>Background color of the page,</li><li>dialog primary button font color,</li><li>Feedback button font color</li></ul></td></tr><tr><td>primaryText</td><td><ul><li>Primary font color</li><li>Feedback button background color</li></ul></td></tr><tr><td>themeDarker</td><td><ul><li>hovered Follow and Share links' color (at right corner of Nav Bar)</li></ul></td></tr><tr><td>themeDark</td><td><ul><li>Command bar icons' color,</li><li>dialog hovered primary button background color,</li><li>hovered Feedback button background color</li></ul></td></tr><tr><td>themeDarkAlt</td><td><ul><li>Always the same as themeDark</li></ul></td></tr><tr><td>themePrimary</td><td><ul><li>Site Logo Acronym background color,</li><li>Command bar top border (actually, this border is set as bottom border of 'Site Header' element that contains Site Logo and Site Title),</li><li>color of Edit link in Quick Nav,</li><li>color of Follow and Share icons (at right corner of Nav Bar),</li><li>Nav Bar hovered links' color,</li><li>dialog primary button background color</li></ul></td></tr><tr><td>themeSecondary</td><td></td></tr><tr><td>themeTertiary</td><td></td></tr><tr><td>themeLight</td><td></td></tr><tr><td>themeLighter</td><td></td></tr><tr><td>themeLighterAlt</td><td></td></tr><tr><td>black</td><td></td></tr><tr><td>cmdbarSelected</td><td></td></tr><tr><td>cmdbarSelectedHover</td><td></td></tr><tr><td>neutralDark</td><td></td></tr><tr><td>neutralPrimary</td><td></td></tr><tr><td>neutralPrimaryAlt</td><td></td></tr><tr><td>neutralPrimaryTranslucent50</td><td></td></tr><tr><td>neutralSecondary</td><td></td></tr><tr><td>neutralSecondaryAlt</td><td><ul><li>background color of hovered Delete and Edit web part buttons in edit mode</li></ul></td></tr><tr><td>neutralTertiary</td><td><ul><li>border of web part in edit mode,</li><li>background color of add web part (+) button in edit mode</li></ul></td></tr><tr><td>neutralTertiaryAlt</td><td></td></tr><tr><td>neutralQuaternary</td><td></td></tr><tr><td>neutralQuaternaryAlt</td><td></td></tr><tr><td>neutralLight</td><td><ul><li>Command bar hovered button background color</li></ul></td></tr><tr><td>neutralLighter</td><td><ul><li>Command bar background color</li></ul></td></tr><tr><td>neutralLighterAlt</td><td><ul><li>Hovered Quick Nav link background color</li></ul></td></tr><tr><td>white</td><td></td></tr><tr><td>blackTranslucent40</td><td><ul><li>Dialog overlay</li></ul></td></tr><tr><td>whiteTranslucent40</td><td><ul><li>background color of page title input in edit mode</li></ul></td></tr><tr><td>yellow</td><td></td></tr><tr><td>yellowLight</td><td></td></tr><tr><td>orange</td><td></td></tr><tr><td>orangeLight</td><td></td></tr><tr><td>redDark</td><td></td></tr><tr><td>red</td><td></td></tr><tr><td>magentaDark</td><td></td></tr><tr><td>magenta</td><td></td></tr><tr><td>magentaLight</td><td></td></tr><tr><td>purpleDark</td><td></td></tr><tr><td>purple</td><td></td></tr><tr><td>purpleLight</td><td></td></tr><tr><td>blueDark</td><td></td></tr><tr><td>blueMid</td><td></td></tr><tr><td>blue</td><td></td></tr><tr><td>blueLight</td><td></td></tr><tr><td>tealDark</td><td></td></tr><tr><td>teal</td><td></td></tr><tr><td>tealLight</td><td></td></tr><tr><td>greenDark</td><td></td></tr><tr><td>green</td><td></td></tr><tr><td>greenLight</td><td></td></tr><tr><td>error</td><td></td></tr><tr><td>errorBackground</td><td></td></tr><tr><td>success</td><td></td></tr><tr><td>successBackground</td><td></td></tr><tr><td>alert</td><td></td></tr><tr><td>alertBackground</td><td></td></tr><tr><td>infoBackground</td><td></td></tr><tr><td>info</td><td></td></tr><tr><td>orangeLighter</td><td></td></tr><tr><td>themeLightAlt</td><td></td></tr><tr><td>themeAccent</td><td></td></tr><tr><td>themeTertiaryAlt</td><td></td></tr><tr><td>themeAccentTranslucent10</td><td></td></tr><tr><td>suiteBarBackground</td><td></td></tr><tr><td>suiteBarText</td><td></td></tr><tr><td>suiteBarDisabledText</td><td></td></tr><tr><td>topBarBackground</td><td></td></tr><tr><td>topBarText</td><td></td></tr><tr><td>topBarHoverText</td><td></td></tr><tr><td>dialogBorder</td><td></td></tr><tr><td>backgroundImageUri</td><td><ul><li>URL of background image for the page content</li></ul></td></tr></tbody></table><div><br />Please, feel free to add information about the properties in the comments. I will update the table with this info. <br />Have fun!</div><br /><br /><table>  </table>
