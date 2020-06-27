@@ -81,12 +81,12 @@ correctly we'll need:<br />
     <li>Correctly override Office UI Fabric styles</li>
 </ul>Let's see how we can achieve that.<br /><br />
 <h2>1. Handle Theme change in MS Teams</h2>The first step is to handle theme change in Teams.<br />And Teams JavaScript
-SDK contains a handler <span class="code">registerOnThemeChangeHandler</span> that we can use to be informed when the
+SDK contains a handler {% highlight javascript %}registerOnThemeChangeHandler{% endhighlight %} that we can use to be informed when the
 theme is changed.<br />Team's <span class="code">context</span> also contains <span class="code">theme</span> property
 that shows the current theme: default, dark, or contrast.<br />Knowing that, we can use the next code to handle the
 theming:
 <div markdown="1">
-{% highlight ts %}
+```javascript
 protected async onInit(): Promise&lt;void&gt; {
     if (this.context.sdks.microsoftTeams) { 
         // checking that we're in Teams
@@ -98,7 +98,7 @@ protected async onInit(): Promise&lt;void&gt; {
 private _applyTheme = (theme: string): void =&gt; {
     this.context.domElement.setAttribute('data-theme', theme);
     document.body.setAttribute('data-theme', theme);
-    {% endhighlight %}
+```
 </div>
 So, during the initialization, and whenever the theme is changed we are setting <span class="code">data-theme</span>
 attribute of document's body to the selected <span class="code">theme</span>. <h3>Why data attribute on body?</h3>You

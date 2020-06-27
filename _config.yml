@@ -62,14 +62,8 @@ permalink: /:title
 lsi: false
 safe: true
 incremental: false
-markdown: GFM
-highlighter: rouge
-gist:
-  noscript: false
+markdown: kramdown
 kramdown:
-  math_engine: mathjax
   syntax_highlighter: rouge
   input: GFM
-  hard_wrap: false
-  extensions: fenced_code_blocks
-  css_class: 'highlight'
+  #css_class: 'highlight'
