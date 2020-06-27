@@ -21,12 +21,6 @@ thumbnail: https://1.bp.blogspot.com/-EjL9kCrCcpM/Xn6M8_KoliI/AAAAAAAABj8/XV-E0e
 blogger_id: tag:blogger.com,1999:blog-3066084330774405472.post-696348623156838468
 blogger_orig_url: http://blog.aterentiev.com/2020/03/support-microsoft-teams-themes-in.html
 ---
-<style>
-    .code {
-        font-family: Consolas, "courier new", "courier", monospace;
-        font-size: 13px;
-    }
-</style>
 If you are a SharePoint Framework developer, you're most likely aware that SPFx allows you to refer to the theme
 colors of the context site. As a result, if your web part is placed on a site that uses a red theme, it uses the red
 palette as well, and if it's placed on a site that uses the blue theme, it automatically adjusts itself to use the blue
@@ -46,7 +40,7 @@ result, you have a project structure like:<br /><a
         data-original-width="618" data-original-height="620" width="700" /></a><br />And inside your SCSS you can have
 something like:
 <div markdown="1">
-{% highlight css %}
+{% highlight sass %}
     .firstComponent {
         background: "[theme:white, default:#fff]";
         color: "[theme:primaryText, default:#333]";
@@ -81,13 +75,13 @@ correctly we'll need:<br />
     <li>Correctly override Office UI Fabric styles</li>
 </ul>Let's see how we can achieve that.<br /><br />
 <h2>1. Handle Theme change in MS Teams</h2>The first step is to handle theme change in Teams.<br />And Teams JavaScript
-SDK contains a handler {% highlight javascript %}registerOnThemeChangeHandler{% endhighlight %} that we can use to be informed when the
+SDK contains a handler <span class="code">registerOnThemeChangeHandler</span> that we can use to be informed when the
 theme is changed.<br />Team's <span class="code">context</span> also contains <span class="code">theme</span> property
 that shows the current theme: default, dark, or contrast.<br />Knowing that, we can use the next code to handle the
 theming:
 <div markdown="1">
-```javascript
-protected async onInit(): Promise&lt;void&gt; {
+{% highlight typescript %}
+protected async onInit(): Promise<void> {
     if (this.context.sdks.microsoftTeams) { 
         // checking that we're in Teams
         const context = this.context.sdks.microsoftTeams!.context;
@@ -95,10 +89,10 @@ protected async onInit(): Promise&lt;void&gt; {
         this.context.sdks.microsoftTeams.teamsJs.registerOnThemeChangeHandler(this._applyTheme);
     }
 }
-private _applyTheme = (theme: string): void =&gt; {
+private _applyTheme = (theme: string): void => {
     this.context.domElement.setAttribute('data-theme', theme);
     document.body.setAttribute('data-theme', theme);
-```
+{% endhighlight %}
 </div>
 So, during the initialization, and whenever the theme is changed we are setting <span class="code">data-theme</span>
 attribute of document's body to the selected <span class="code">theme</span>. <h3>Why data attribute on body?</h3>You
@@ -112,10 +106,17 @@ reasons for that: <ul>
         the web part's root component it will be trasformed to something like <span
             class="code">dark_6e6e1386</span>.<br />But in our <span class="code">FirstComponent</span> it will be <span
             class="code">dark_32a77d9d</span>.<br />As a result we won't be able to use nested CSS rules like:
-        <pre class="brush: css;"><br />.dark {<br />  .firstComponent {<br />  }<br />}<br /></pre>
+    <div markdonw="1">
+{% highlight sass %}
+        .dark {
+            .firstComponent {        
+            }
+        }
+{% endhighlight %}
+</div>
     </li>
     <li><b>You can use global class name instead of data attribute</b>. I just prefer data attribute.</li>
-</ul><br />
+</ul>
 <h2>2. Design Your Components for Teams Themes</h2>Next step is to select what colors to use for each of 3 Teams
 themes.<br />In ideal world designer should help you with that...<br />But in real world we can use some helper tools to
 achieve it by ourselves.<br />For example, we can use <a href="https://aka.ms/spthemebuilder" target="_blank">SharePoint
@@ -144,16 +145,55 @@ future use.<br />And let's do the same for dark and contrast.<br /><br />Dark: <
 still recommended to either tweak the colors a bit if needed or beg a designer to help you :)<br /><br />
 <h2>3. Define Variables for Each Color and Each Theme</h2>Next step is to create SASS variables.<br />For example,
 instead of direct
-<pre class="brush: css;"><br />.firstComponent {<br />  background: "[theme:white, default:#fff]";<br />}<br /></pre>We
-can use variable:
-<pre
-    class="brush: css;"><br />$background: "[theme:white, default:#fff]";<br />.firstComponent {<br />  background: $background;<br />}<br /></pre>
+
+<div markdown="1">
+{% highlight sass %}
+.firstComponent {
+    background: "[theme:white, default:#fff]";
+}
+{% endhighlight %}
+</div>
+
+We can use variable:
+<div markdown="1">
+{% highlight sass %}
+$background: "[theme:white, default:#fff]";
+.firstComponent {
+    background: $background;
+}
+{% endhighlight %}
+</div>
 Moreover, these variables can be define in a separate scss file and shared between different components.<br />I would
 also recommend to provide pretty specific names for the variables. For example, if you want to use some color as <span
     class="code">FirstComponent</span> background, name the variable <span
     class="code">$firstComponent-background</span>.<br />Let's create variables for all our custom color:
-<pre
-    class="brush: typescript;"><br />//SharePoint<br />$firstComponent-background: "[theme:white, default:#fff]";<br />$firstComponent-color: "[theme:primaryText, default:#333]";<br />$firstComponentButton-background: "[theme:themePrimary, default:#0078d4]";<br />$firstComponentButton-color: "[theme:white, default:#fff]";<br /><br />// default theme<br />$default-firstComponent-background: #f3f2f1;<br />$default-firstComponent-color: #252423;<br />$default-firstComponentButton-background: #6264a7;<br />$default-firstComponentButton-color: #f3f2f1;<br /><br />// dark theme<br />$dark-firstComponent-background: #2d2c2c;<br />$dark-firstComponent-color: #ffffff;<br />$dark-firstComponentButton-background: #6264a7;<br />$dark-firstComponentButton-color: #2d2c2c;<br /><br />// contrast theme<br />$contrast-firstComponent-background: #000000;<br />$contrast-firstComponent-color: #ffffff;<br />$contrast-firstComponentButton-background: #6264a7;<br />$contrast-firstComponentButton-color: #000000;<br /></pre>
+<div markdown="1">
+{% highlight sass %}
+//SharePoint
+$firstComponent-background: "[theme:white, default:#fff]";
+$firstComponent-color: "[theme:primaryText, default:#333]";
+$firstComponentButton-background: "[theme:themePrimary, default:#0078d4]";
+$firstComponentButton-color: "[theme:white, default:#fff]";
+
+// default theme
+$default-firstComponent-background: #f3f2f1;
+$default-firstComponent-color: #252423;
+$default-firstComponentButton-background: #6264a7;
+$default-firstComponentButton-color: #f3f2f1;
+
+// dark theme
+$dark-firstComponent-background: #2d2c2c;
+$dark-firstComponent-color: #ffffff;
+$dark-firstComponentButton-background: #6264a7;
+$dark-firstComponentButton-color: #2d2c2c;
+
+// contrast theme
+$contrast-firstComponent-background: #000000;
+$contrast-firstComponent-color: #ffffff;
+$contrast-firstComponentButton-background: #6264a7;
+$contrast-firstComponentButton-color: #000000;
+{% endhighlight %}
+</div>
 And let's define all these variables in the separate module <span class="code">_colors.module.scss</span> in <span
     class="code">common</span>.<br /><a
     href="https://1.bp.blogspot.com/-N1XMSa5QXXg/Xn6iMaQJ3VI/AAAAAAAABlA/x83dai7OtlYqAFtAK-ZXQHGWKO_AWPzwACLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B6.02.23%2BPM.png"
@@ -165,8 +205,55 @@ any of our components. <br /><br />
 the themes we can override styles for our custom components for each theme. And they will be automatically applied as
 this or that value of data attribute is set.<br />Again, using example of the <span class="code">FirstComponent</span>
 we'll have:
-<pre
-    class="brush: css;"><br />@import "../../common/colors.module";<br /><br />.firstComponent {<br />  background: "[theme:white, default:#fff]";<br />  color: "[theme:primaryText, default:#333]";<br /><br />  .button {<br />    background: "[theme:themePrimary, default:#0078d4]";<br />    color: "[theme:white, default:#fff]";<br />}<br />}<br /><br />[data-theme='default'] {<br />  .firstComponent {<br />    background: $default-firstComponent-background;<br />    color: $default-firstComponent-color;<br /><br />    .button {<br />      background: $default-firstComponentButton-background;<br />      color: $default-firstComponentButton-color;<br />    }<br />  }<br />}<br /><br />[data-theme='dark'] {<br />  .firstComponent {<br />    background: $dark-firstComponent-background;<br />    color: $dark-firstComponent-color;<br /><br />    .button {<br />      background: $dark-firstComponentButton-background;<br />      color: $dark-firstComponentButton-color;<br />    }<br />  }<br />}<br /><br />[data-theme='contrast'] {<br />  .firstComponent {<br />    background: $contrast-firstComponent-background;<br />    color: $contrast-firstComponent-color;<br /><br />    .button {<br />      background: $contrast-firstComponentButton-background;<br />      color: $contrast-firstComponentButton-color;<br />    }<br />  }<br />}<br /></pre>
+<div markdown="1">
+{% highlight sass %}
+@import "../../common/colors.module";
+.firstComponent {
+    background: "[theme:white, default:#fff]";
+    color: "[theme:primaryText, default:#333]";
+    
+    .button {
+        background: "[theme:themePrimary, default:#0078d4]";
+        color: "[theme:white, default:#fff]";
+    }
+}
+
+[data-theme='default'] {
+    .firstComponent {
+        background: $default-firstComponent-background;
+        color: $default-firstComponent-color;
+        .button {
+            background: $default-firstComponentButton-background;
+            color: $default-firstComponentButton-color;
+        }
+    }
+}
+
+[data-theme='dark'] {
+    .firstComponent {
+        background: $dark-firstComponent-background;
+        color: $dark-firstComponent-color;
+        
+        .button {
+            background: $dark-firstComponentButton-background;
+            color: $dark-firstComponentButton-color;
+        }
+    }
+}
+
+[data-theme='contrast'] {
+    .firstComponent {
+        background: $contrast-firstComponent-background;
+        color: $contrast-firstComponent-color;
+        
+        .button {
+            background: $contrast-firstComponentButton-background;
+            color: $contrast-firstComponentButton-color;
+        }
+    }
+}
+{% endhighlight %}
+</div>
 So, here we still use site theme if the web part is rendered in SharePoint. But we also have different colors for
 different themes in Microsoft Teams.<br />And now our component looks much better in Teams:<br /><a
     href="https://2.bp.blogspot.com/-Z1it88Zctp4/Xn-6gRRKTjI/AAAAAAAABlM/NMUNm5grOgYz8BM54lUKmcS4TjSWHEDjQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-28%2Bat%2B1.55.02%2BPM.png"
@@ -199,20 +286,126 @@ in the root component.<br />But first, let's add variables that will be used in 
     class="code">_colors.module.scss</span>. Again, you can get most of the colors from SharePoint Theme Generator. If
 some values do exist in <span class="code">window.__themeState__.theme</span> but not in the Generator then just switch
 SharePoint site theme to the one that is close enough to Teams theme and get values from there.<br />
-<pre
-    class="brush: typescript;"><br />//SharePoint<br />$overlay: "[theme:whiteTranslucent40, default:rgba(255, 255,255, 0.4)]";<br />$surfaceBackground: "[theme:white, default:#fff]";<br />$primaryText: "[theme:primaryText, default:#333]";<br />$panelBorder: "[theme: neutralLight, default: #eaeaea]";<br /><br />// default theme<br />$default-overlay: rgba(255, 255, 255, 0.4);<br />$default-surfaceBackground: #f3f2f1;<br />$default-primaryText: #252423;<br />$default-panelBorder: #dedddc;<br /><br />// dark theme<br />$dark-overlay: rgba(37, 36, 35, 0.75);<br />$dark-surfaceBackground: #2d2c2c;<br />$dark-primaryText: #ffffff;<br />$dark-panelBorder: #4c4b4b;<br /><br />// contrast theme<br />$contrast-overlay: rgba(37, 36, 35, 0.75);<br />$contrast-surfaceBackground: #000000;<br />$contrast-primaryText: #ffffff;<br />$contrast-panelBorder: #4c4b4b;<br /><br /></pre>
+<div markdown="1">
+{% highlight sass %}
+//SharePoint
+$overlay: "[theme:whiteTranslucent40, default:rgba(255, 255,255, 0.4)]";
+$surfaceBackground: "[theme:white, default:#fff]";
+$primaryText: "[theme:primaryText, default:#333]";
+$panelBorder: "[theme: neutralLight, default: #eaeaea]";
+
+// default theme
+$default-overlay: rgba(255, 255, 255, 0.4);
+$default-surfaceBackground: #f3f2f1;
+$default-primaryText: #252423;
+$default-panelBorder: #dedddc;
+
+// dark theme
+$dark-overlay: rgba(37, 36, 35, 0.75);
+$dark-surfaceBackground: #2d2c2c;
+$dark-primaryText: #ffffff;
+$dark-panelBorder: #4c4b4b;
+
+// contrast theme
+$contrast-overlay: rgba(37, 36, 35, 0.75);
+$contrast-surfaceBackground: #000000;
+$contrast-primaryText: #ffffff;$contrast-panelBorder: #4c4b4b;
+{% endhighlight %}
+</div>
 <br /><span class="code">Global.default.module.scss</span>
-<pre
-    class="brush: css;"><br />@import './colors.module';<br />[data-theme='default'] {<br />  :global {<br />    .ms-Fabric {<br />      color: $default-primaryText;<br />    }<br />    .ms-Button-icon {<br />      color: $default-primaryText;<br />    }<br /><br />    .ms-Overlay {<br />      background-color: $default-overlay;<br />    }<br /><br />    .ms-Panel-main {<br />      background-color: $default-surfaceBackground;<br />      border-left-color: $default-panelBorder;<br />      border-right-color: $default-panelBorder;<br />      .ms-Panel-headerText {<br />        color: $default-primaryText;<br />      }<br />    }<br />  }<br />}<br /></pre>
+<div markdown="1">
+{% highlight sass %}
+@import './colors.module';
+[data-theme='default'] {
+    :global {
+        .ms-Fabric {
+            color: $default-primaryText;
+        }
+        .ms-Button-icon {
+            color: $default-primaryText;
+        }
+        
+        .ms-Overlay {
+            background-color: $default-overlay;
+        }
+        
+        .ms-Panel-main {
+            background-color: $default-surfaceBackground;
+            border-left-color: $default-panelBorder;
+            border-right-color: $default-panelBorder;
+            .ms-Panel-headerText {
+                color: $default-primaryText;
+            }
+        }
+    }
+}
+{% endhighlight %}
+</div>
 <br /><span class="code">Global.dark.module.scss</span>
-<pre
-    class="brush: css;"><br />@import './colors.module';<br />[data-theme='dark'] {<br />  :global {<br />    .ms-Fabric {<br />      color: $dark-primaryText;<br />    }<br />    .ms-Button-icon {<br />      color: $dark-primaryText;<br />    }<br /><br />    .ms-Overlay {<br />      background-color: $dark-overlay;<br />    }<br /><br />    .ms-Panel-main {<br />      background-color: $dark-surfaceBackground;<br />      border-left-color: $dark-panelBorder;<br />      border-right-color: $dark-panelBorder;<br />      .ms-Panel-headerText {<br />        color: $dark-primaryText;<br />      }<br />    }<br />  }<br />}<br /></pre>
-<br /><span class="code">Global.contrast.module.scss</span>
-<pre
-    class="brush: css;"><br />@import './colors.module';<br />[data-theme='contrast'] {<br />  :global {<br />    .ms-Fabric {<br />      color: $contrast-primaryText;<br />    }<br />    .ms-Button-icon {<br />      color: $contrast-primaryText;<br />    }<br /><br />    .ms-Overlay {<br />      background-color: $contrast-overlay;<br />    }<br /><br />    .ms-Panel-main {<br />      background-color: $contrast-surfaceBackground;<br />      border-left-color: $contrast-panelBorder;<br />      border-right-color: $contrast-panelBorder;<br />      .ms-Panel-headerText {<br />        color: $contrast-primaryText;<br />      }<br />    }<br />  }<br />}<br /></pre>
+<div markdown="1">
+{% highlight sass %}
+@import './colors.module';
+[data-theme='dark'] {
+    :global {
+        .ms-Fabric {
+            color: $dark-primaryText;
+        }
+        .ms-Button-icon {
+            color: $dark-primaryText;
+        }
+        .ms-Overlay {
+            background-color: $dark-overlay;
+        }
+        
+        .ms-Panel-main {
+            background-color: $dark-surfaceBackground;
+            border-left-color: $dark-panelBorder;
+            border-right-color: $dark-panelBorder;
+            .ms-Panel-headerText {
+                color: $dark-primaryText;
+            }
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<br />
+<span class="code">Global.contrast.module.scss</span>
+<div markdown="1">
+{% highlight sass %}
+@import './colors.module';
+[data-theme='contrast'] {
+    :global {
+        .ms-Fabric {
+            color: $contrast-primaryText;
+        }
+        .ms-Button-icon {
+            color: $contrast-primaryText;
+        }
+        .ms-Overlay {
+            background-color: $contrast-overlay;
+        }
+        
+        .ms-Panel-main {
+            background-color: $contrast-surfaceBackground;
+            border-left-color: $contrast-panelBorder;
+            border-right-color: $contrast-panelBorder;
+            .ms-Panel-headerText {
+                color: $contrast-primaryText;
+            }
+        }
+    }
+}
+{% endhighlight %}
+</div>
 And in the root component:<br />
-<pre
-    class="brush: css;"><br />@import '../../../common/Global.dark.module.scss';<br />@import '../../../common/Global.default.module.scss';<br />@import '../../../common/Global.contrast.module.scss';<br /></pre>
+<div markdown="1">
+{% highlight sass %}
+@import '../../../common/Global.dark.module.scss';
+@import '../../../common/Global.default.module.scss';
+@import '../../../common/Global.contrast.module.scss';
+{% endhighlight %}
+</div>
 Now the Panel has correct colors as well:<br /><a
     href="https://2.bp.blogspot.com/-jwKGTDQfxbo/Xn_FkPW_ubI/AAAAAAAABl8/yPYm3m64it4IL1W2boduZ__FdwwfSlJ8wCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-28%2Bat%2B2.45.29%2BPM.png"
     imageanchor="1"><img border="0"
@@ -227,19 +420,158 @@ Pane<br /><a
 have any global classes we can override. Only <span class="code">.spPropertyPaneContainer</span>.<br />But of course we
 can use other CSS selectors.<br />Again, let's define all the colors first in our <span
     class="code">_colors.module.scss</span>:
-<pre class"brush:
-    typescript;"><br />// SharePoint<br />$white: "[theme:white, default: #fff]"; // property pane background<br />$inputBackground: "[theme:inputBackground, default:#fff]"; //input background<br />$inputBorder: "[theme:inputBorder, default:#a6a6a6]"; // input border<br />$inputBorderHovered: "[theme:inputBorderHovered, default:#333333]"; // input border hovered<br /><br />// default theme<br />$default-white: #f3f2f1;<br />$default-inputBackground: #fff;<br />$default-inputBorder: #b5b4b2;<br />$default-inputBorderHovered: #252423;<br /><br />// dark-theme<br />$dark-white: #2d2c2c;<br />$dark-inputBackground: #000;<br />$dark-inputBorder: #c8c8c8;<br />$dark-inputBorderHovered: #ffffff;<br /><br />//contrast theme<br />$contrast-white: #000000;<br />$contrast-inputBackground: #000;<br />$contrast-inputBorder: #c8c8c8;<br />$contrast-inputBorderHovered: #ffffff;<br /></pre>
+<div markdown="1">
+{% highlight sass %}
+// SharePoint
+$white: "[theme:white, default: #fff]"; // property pane background
+$inputBackground: "[theme:inputBackground, default:#fff]"; //input background
+$inputBorder: "[theme:inputBorder, default:#a6a6a6]"; // input border
+$inputBorderHovered: "[theme:inputBorderHovered, default:#333333]"; // input border hovered
+
+// default theme
+$default-white: #f3f2f1;
+$default-inputBackground: #fff;
+$default-inputBorder: #b5b4b2;
+$default-inputBorderHovered: #252423;
+
+// dark-theme
+$dark-white: #2d2c2c;
+$dark-inputBackground: #000;
+$dark-inputBorder: #c8c8c8;
+$dark-inputBorderHovered: #ffffff;
+
+//contrast theme
+$contrast-white: #000000;
+$contrast-inputBackground: #000;
+$contrast-inputBorder: #c8c8c8;
+$contrast-inputBorderHovered: #ffffff;
+{% endhighlight %}
+</div>
 And now let's add overrides to <span class="code">Global.default.module.scss, Global.dark.module.scss,
     Global.contrast.module.scss</span> (<b>Note: the CSS below should be added inside <span class="code">[data-theme] {
         :global {</span></b>): <span class="code">Global.default.module.scss</span>
-<pre
-    class="brush: css;"><br />// Property Pane<br />.spPropertyPaneContainer {<br />  background-color: $default-white;<br />  [class^="propertyPane_"] {<br />    background-color: $default-white;<br />    border-left-color: $default-panelBorder;<br />    [class^="propertyPanePageTitle_"],<br />    [class^="propertyPanePageDescription_"],<br />    [class^="propertyPaneGroupHeaderNoAccordion_"] {<br />      color: $default-primaryText;<br />    }<br />    .ms-Button--icon {<br />      &:hover {<br />        background-color: transparent;<br />      }<br />    }<br />  }<br />}<br /><br />// Text Field<br />.ms-Label {<br />  color: $default-primaryText;<br />}<br />.ms-TextField {<br />  .ms-TextField-fieldGroup {<br />    background-color: $default-inputBackground;<br />    color: $default-primaryText;<br />    border-color: $default-inputBorder;<br />    .ms-TextField-field {<br />      color: $default-primaryText;<br />    }<br />    &:hover {<br />      border-color: $default-inputBorderHovered;<br />    }<br />  }<br />}<br /></pre>
+<div markdown="1">
+{% highlight sass %}
+// Property Pane
+.spPropertyPaneContainer {
+    background-color: $default-white;
+    [class^="propertyPane_"] {
+        background-color: $default-white;
+        border-left-color: $default-panelBorder;
+        [class^="propertyPanePageTitle_"],
+        [class^="propertyPanePageDescription_"],
+        [class^="propertyPaneGroupHeaderNoAccordion_"] {
+            color: $default-primaryText;
+        }
+        .ms-Button--icon {
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+// Text Field
+.ms-Label {
+    color: $default-primaryText;
+}
+.ms-TextField {
+    .ms-TextField-fieldGroup {
+        background-color: $default-inputBackground;
+        color: $default-primaryText;
+        border-color: $default-inputBorder;
+        .ms-TextField-field {
+            color: $default-primaryText;
+        }
+        &:hover {
+            border-color: $default-inputBorderHovered;
+        }
+    }
+}
+{% endhighlight %}
+</div>
 <br /><span class="code">Global.dark.module.scss</span>
-<pre
-    class="brush: css;"><br />// Property Pane<br />.spPropertyPaneContainer {<br />  background-color: $dark-white;<br />  [class^="propertyPane_"] {<br />    background-color: $dark-white;<br />    border-left-color: $dark-panelBorder;<br />    [class^="propertyPanePageTitle_"],<br />    [class^="propertyPanePageDescription_"],<br />    [class^="propertyPaneGroupHeaderNoAccordion_"] {<br />      color: $dark-primaryText;<br />    }<br />    .ms-Button--icon {<br />      &:hover {<br />        background-color: transparent;<br />      }<br />    }<br />  }<br />}<br /><br />// Text Field<br />.ms-Label {<br />  color: $dark-primaryText;<br />}<br />.ms-TextField {<br />  .ms-TextField-fieldGroup {<br />    background-color: $dark-inputBackground;<br />    color: $dark-primaryText;<br />    border-color: $dark-inputBorder;<br />    .ms-TextField-field {<br />      color: $dark-primaryText;<br />    }<br />    &:hover {<br />      border-color: $dark-inputBorderHovered;<br />    }<br />  }<br />}<br /></pre>
+<div markdown="1">
+{% highlight sass %}
+// Property Pane
+.spPropertyPaneContainer {
+    background-color: $dark-white;
+    [class^="propertyPane_"] {
+        background-color: $dark-white;
+        border-left-color: $dark-panelBorder;
+        [class^="propertyPanePageTitle_"],
+        [class^="propertyPanePageDescription_"],
+        [class^="propertyPaneGroupHeaderNoAccordion_"] {
+            color: $dark-primaryText;
+        }
+        .ms-Button--icon {
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+// Text Field
+.ms-Label {
+    color: $dark-primaryText;
+}
+.ms-TextField {
+    .ms-TextField-fieldGroup {
+        background-color: $dark-inputBackground;
+        color: $dark-primaryText;
+        border-color: $dark-inputBorder;
+        .ms-TextField-field {
+            color: $dark-primaryText;
+        }
+        &:hover {
+            border-color: $dark-inputBorderHovered;
+        }
+    }
+}
+{% endhighlight %}
+</div>
 <br /><span class="code">Global.contrast.module.scss</span>
-<pre
-    class="brush: css;"><br />// Property Pane<br />.spPropertyPaneContainer {<br />  background-color: $contrast-white;<br />  [class^="propertyPane_"] {<br />    background-color: $contrast-white;<br />    border-left-color: $contrast-panelBorder;<br />    [class^="propertyPanePageTitle_"],<br />    [class^="propertyPanePageDescription_"],<br />    [class^="propertyPaneGroupHeaderNoAccordion_"] {<br />      color: $contrast-primaryText;<br />    }<br />    .ms-Button--icon {<br />      &:hover {<br />        background-color: transparent;<br />      }<br />    }<br />  }<br />}<br /><br />// Text Field<br />.ms-Label {<br />  color: $contrast-primaryText;<br />}<br />.ms-TextField {<br />  .ms-TextField-fieldGroup {<br />    background-color: $contrast-inputBackground;<br />    color: $contrast-primaryText;<br />    border-color: $contrast-inputBorder;<br />    .ms-TextField-field {<br />      color: $contrast-primaryText;<br />    }<br />    &:hover {<br />      border-color: $contrast-inputBorderHovered;<br />    }<br />  }<br />}<br /></pre>
+<div markdown="1">
+{% highlight sass %}
+// Property Pane
+.spPropertyPaneContainer {
+    background-color: $contrast-white;
+    [class^="propertyPane_"] {
+        background-color: $contrast-white;
+        border-left-color: $contrast-panelBorder;
+        [class^="propertyPanePageTitle_"],
+        [class^="propertyPanePageDescription_"],
+        [class^="propertyPaneGroupHeaderNoAccordion_"] {
+            color: $contrast-primaryText;
+        }
+        .ms-Button--icon {
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+// Text Field
+.ms-Label {
+    color: $contrast-primaryText;
+}
+.ms-TextField {
+    .ms-TextField-fieldGroup {
+        background-color: $contrast-inputBackground;
+        color: $contrast-primaryText;
+        border-color: $contrast-inputBorder;
+        .ms-TextField-field {
+            color: $contrast-primaryText;
+        }
+        &:hover {
+            border-color: $contrast-inputBorderHovered;
+        }
+    }
+}
+{% endhighlight %}
+</div>
 <br />Yay! Now all the parts of our web part look amazing:<br /><a
     href="https://3.bp.blogspot.com/-QGO4jWFoGF8/XoD3dtKfnlI/AAAAAAAABm8/5uk94NH1JxIRo-p5wIvi7Q-Px7wLCN2OACLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-29%2Bat%2B12.30.30%2BPM.png"
     imageanchor="1"><img border="0"
