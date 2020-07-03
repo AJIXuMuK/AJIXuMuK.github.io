@@ -7,7 +7,7 @@ logo:
 # Author image is used in site sidebar and greetings in the home page hero text
 author:
   image: 'authorimage.jpg'
-  greetings: "Hello everyone! My name is Alex Terentiev. I'm an Office Development MVP and a member of Microsoft 365 Team."
+  greetings: "Hello everyone! My name is Alex Terentiev. I'm an Office Development MVP and a member of Microsoft 365 PnP Team."
 favicon: 'assets/images/favicon.ico'
 baseurl: 
 #production_url: https://royce.netlify.com/
