@@ -12,7 +12,6 @@ tags:
 - Field Definition
 - SharePoint
 modified_time: '2018-01-18T09:42:24.419-08:00'
-thumbnail: https://1.bp.blogspot.com/-XnJOVRjg7yY/WmDWjWQq_SI/AAAAAAAAAtM/VFeMK1RQsR8mDuWerm5qcfoppotfG39FQCLcBGAs/s72-c/Screen%2BShot%2B2018-01-18%2Bat%2B9.16.42%2BAM.png
 blogger_id: tag:blogger.com,1999:blog-3066084330774405472.post-2720469383745360816
 blogger_orig_url: http://blog.aterentiev.com/2018/01/reverting-back-custom-site-column.html
 ---
@@ -25,7 +24,7 @@ $site.Id
 
 {% endhighlight %}
 </div>
-This cmdlets will display the Guid of the site into the management shell. <a href="https://1.bp.blogspot.com/-XnJOVRjg7yY/WmDWjWQq_SI/AAAAAAAAAtM/VFeMK1RQsR8mDuWerm5qcfoppotfG39FQCLcBGAs/s1600/Screen%2BShot%2B2018-01-18%2Bat%2B9.16.42%2BAM.png" imageanchor="1"><img border="0" data-original-height="86" data-original-width="522" height="53" src="https://1.bp.blogspot.com/-XnJOVRjg7yY/WmDWjWQq_SI/AAAAAAAAAtM/VFeMK1RQsR8mDuWerm5qcfoppotfG39FQCLcBGAs/s320/Screen%2BShot%2B2018-01-18%2Bat%2B9.16.42%2BAM.png" width="320" /></a></li><li>Next step is to open the Content Database related to the Site Collection in some IDE (most probably SQL Management Studio) and run the query listed below to check that the column was actually modified directly (not from feature): 
+This cmdlets will display the Guid of the site into the management shell. <img border="0" src="{{site.baseurl}}/assets/images/posts/2018/guid.png" /></li><li>Next step is to open the Content Database related to the Site Collection in some IDE (most probably SQL Management Studio) and run the query listed below to check that the column was actually modified directly (not from feature): 
 <div markdown="1">
 {% highlight sql %}
 

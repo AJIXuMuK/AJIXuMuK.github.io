@@ -17,7 +17,6 @@ tags:
 - SharePoint Framework
 - Office 365
 modified_time: '2018-10-07T12:14:28.295-07:00'
-thumbnail: https://2.bp.blogspot.com/-W1g5ejpWAM4/W5H_JGBKZwI/AAAAAAAAA4Y/euMr9XhpgjUCNWa652dPkAr_b4hQNnlYwCLcBGAs/s72-c/Screen%2BShot%2B2018-09-06%2Bat%2B9.08.43%2BPM.png
 blogger_id: tag:blogger.com,1999:blog-3066084330774405472.post-6247888011485655552
 blogger_orig_url: http://blog.aterentiev.com/2018/09/using-vuejs-in-sharepoint-framework.html
 ---
@@ -427,7 +426,7 @@ PropertyFieldImageUrl('imageUrl', {
 
 {% endhighlight %}
 </div>
-To make this code work you should also define <span class="code">imageUrl</span> property in web part properties interface and <span class="code">ImageUrlFieldLabel</span> in web part's strings.<br />Now the value from the control can be used somewhere in the web part.<br />The full code for this sample can be found <a href="https://github.com/AJIXuMuK/vuejs/tree/master/proppane-control" target="_blank">here</a>.<br />The web part from this demo just shows the value from the control like that:<br /><a href="https://2.bp.blogspot.com/-W1g5ejpWAM4/W5H_JGBKZwI/AAAAAAAAA4Y/euMr9XhpgjUCNWa652dPkAr_b4hQNnlYwCLcBGAs/s1600/Screen%2BShot%2B2018-09-06%2Bat%2B9.08.43%2BPM.png" imageanchor="1" ><img border="0" src="https://2.bp.blogspot.com/-W1g5ejpWAM4/W5H_JGBKZwI/AAAAAAAAA4Y/euMr9XhpgjUCNWa652dPkAr_b4hQNnlYwCLcBGAs/s1600/Screen%2BShot%2B2018-09-06%2Bat%2B9.08.43%2BPM.png" data-original-width="1600" data-original-height="791" width="600" /></a><br/><h2>Yeoman Generator for Property Pane Controls</h2>Similarly to VueSpfx generator, it would be great to have some "add-on" Yeoman generator that creates all the structure for Property Pane Custom Control and provides some sample code.<br />And there is such generator! <a href="https://www.npmjs.com/package/generator-spfx-proppane-control" target="_blank">generator-spfx-proppane-control</a>You can install it using 
+To make this code work you should also define <span class="code">imageUrl</span> property in web part properties interface and <span class="code">ImageUrlFieldLabel</span> in web part's strings.<br />Now the value from the control can be used somewhere in the web part.<br />The full code for this sample can be found <a href="https://github.com/AJIXuMuK/vuejs/tree/master/proppane-control" target="_blank">here</a>.<br />The web part from this demo just shows the value from the control like that:<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2018/image-url-webpart.png"/><br/><h2>Yeoman Generator for Property Pane Controls</h2>Similarly to VueSpfx generator, it would be great to have some "add-on" Yeoman generator that creates all the structure for Property Pane Custom Control and provides some sample code.<br />And there is such generator! <a href="https://www.npmjs.com/package/generator-spfx-proppane-control" target="_blank">generator-spfx-proppane-control</a>You can install it using 
 <div markdown="1">
 {% highlight console %}
 

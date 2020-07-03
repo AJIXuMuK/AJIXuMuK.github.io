@@ -13,7 +13,7 @@ tags:
 - Office 365
 - SharePoint
 modified_time: '2019-01-20T11:46:21.355-08:00'
-thumbnail: https://3.bp.blogspot.com/-HmPuPjpiL8w/XETOmzw9H4I/AAAAAAAABAk/nidLpahITbIhpFLh010UzbF42gy_LSjQwCLcBGAs/s72-c/google-charts.png
+featured_image_thumbnail: assets/images/posts/2019/google-charts.png
 blogger_id: tag:blogger.com,1999:blog-3066084330774405472.post-2015303535837982937
 blogger_orig_url: http://blog.aterentiev.com/2019/01/add-google-charts-into-sharepoint.html
 ---
@@ -125,4 +125,4 @@ protected onInit(): Promise<void> {
 
 {% endhighlight %}
 </div>
-Now we can run our solution with <span class="code">gulp serve</span> and see Google Charts in action:<br /><a href="https://3.bp.blogspot.com/-HmPuPjpiL8w/XETOmzw9H4I/AAAAAAAABAk/nidLpahITbIhpFLh010UzbF42gy_LSjQwCLcBGAs/s1600/google-charts.png" imageanchor="1" ><img border="0" src="https://3.bp.blogspot.com/-HmPuPjpiL8w/XETOmzw9H4I/AAAAAAAABAk/nidLpahITbIhpFLh010UzbF42gy_LSjQwCLcBGAs/s1600/google-charts.png" data-original-width="1600" data-original-height="565" width="600" /></a><br />And that's it! Google Charts are added to the SharePoint Framework web part!<br />You can find the code for this sample <a href="https://github.com/AJIXuMuK/issues/tree/master/google-charts" target="_blank">here</a>.<br />I want to mention that this sample is not final solution to be reused without modifications as it doesn't contain some additional must-haves like checking in <span class="code">_drawChart</span> if <span class="code">pie-chart</span> div has been added to the DOM and so on. So, think of it as a starting point for your implementation.<br /><br />That's it for today!<br />Have fun!
+Now we can run our solution with <span class="code">gulp serve</span> and see Google Charts in action:<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2019/google-charts.png" /><br />And that's it! Google Charts are added to the SharePoint Framework web part!<br />You can find the code for this sample <a href="https://github.com/AJIXuMuK/issues/tree/master/google-charts" target="_blank">here</a>.<br />I want to mention that this sample is not final solution to be reused without modifications as it doesn't contain some additional must-haves like checking in <span class="code">_drawChart</span> if <span class="code">pie-chart</span> div has been added to the DOM and so on. So, think of it as a starting point for your implementation.<br /><br />That's it for today!<br />Have fun!
