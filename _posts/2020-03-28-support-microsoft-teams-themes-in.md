@@ -17,7 +17,8 @@ tags:
 - Themes
 - Dark Theme
 modified_time: '2020-03-29T12:33:04.938-07:00'
-thumbnail: https://1.bp.blogspot.com/-EjL9kCrCcpM/Xn6M8_KoliI/AAAAAAAABj8/XV-E0e98grAT1t0wJbXqNSw1h6aPPyHxQCLcBGAsYHQ/s72-c/Screen%2BShot%2B2020-03-27%2Bat%2B4.31.40%2BPM.png
+featured_image_thumbnail: assets/images/posts/2020/teams-dark-final.png
+featured_image: assets/images/posts/2020/teams-dark-final.png
 blogger_id: tag:blogger.com,1999:blog-3066084330774405472.post-696348623156838468
 blogger_orig_url: http://blog.aterentiev.com/2020/03/support-microsoft-teams-themes-in.html
 ---
@@ -33,11 +34,8 @@ components. <b>Note:</b> I use React for production SPFx development, so all the
 other frameworks, especially if the components are not so encapsulated as in React. <br /><a name='more'></a><br />
 <h2>Initial State</h2>Let's say, you were developing your web part for SharePoint. And as a good developer, you have a
 separate folder with a separate CSS (SCSS) for each component. And, of course, you use SPFx theme colors.<br />As a
-result, you have a project structure like:<br /><a
-    href="https://1.bp.blogspot.com/-EjL9kCrCcpM/Xn6M8_KoliI/AAAAAAAABj8/XV-E0e98grAT1t0wJbXqNSw1h6aPPyHxQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B4.31.40%2BPM.png"
-    imageanchor="1"><img border="0"
-        src="https://1.bp.blogspot.com/-EjL9kCrCcpM/Xn6M8_KoliI/AAAAAAAABj8/XV-E0e98grAT1t0wJbXqNSw1h6aPPyHxQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B4.31.40%2BPM.png"
-        data-original-width="618" data-original-height="620" width="700" /></a><br />And inside your SCSS you can have
+result, you have a project structure like:<br /><img border="0"
+        src="{{site.baseurl}}/assets/images/posts/2020/project-structure.png"/><br />And inside your SCSS you can have
 something like:
 <div markdown="1">
 {% highlight sass %}
@@ -52,23 +50,11 @@ something like:
     }
 {% endhighlight %}
 </div>
-And it will look always good in SharePoint:<br /><a
-    href="https://2.bp.blogspot.com/-AidCxv_l1Zo/Xn6RppK8hOI/AAAAAAAABkU/-xXdtkKihqoSdGQz_KHz5byPD-8CGsVdQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B4.51.37%2BPM.png"
-    imageanchor="1"><img border="0"
-        src="https://2.bp.blogspot.com/-AidCxv_l1Zo/Xn6RppK8hOI/AAAAAAAABkU/-xXdtkKihqoSdGQz_KHz5byPD-8CGsVdQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B4.51.37%2BPM.png"
-        data-original-width="1600" data-original-height="505" width="700" /></a><br />But in MS Teams, especially with
-dark theme, it may look not so good:<br /><a
-    href="https://1.bp.blogspot.com/-XGr7mesYRE4/Xn6SAMF13EI/AAAAAAAABkc/nLFjStdvDFw-h2JOr858UZtQoNjyS8LqACLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B4.53.24%2BPM.png"
-    imageanchor="1"><img border="0"
-        src="https://1.bp.blogspot.com/-XGr7mesYRE4/Xn6SAMF13EI/AAAAAAAABkc/nLFjStdvDFw-h2JOr858UZtQoNjyS8LqACLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B4.53.24%2BPM.png"
-        data-original-width="1600" data-original-height="807" width="700" /></a><br />It happens because your web part
+And it will look always good in SharePoint:<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2020/teams-theme-sp.png" /><br />But in MS Teams, especially with
+dark theme, it may look not so good:<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2020/teams-dark.png" /><br />It happens because your web part
 is still "lives" in the context of the underlying site. And, in my case, it has "green" theme.<br />And if you use
 Office UI Fabric components, all of them will either use their own default styles or the theme from SharePoint site as
-well:<br /><a
-    href="https://2.bp.blogspot.com/-5Va-I-IvZJg/Xn6TMCDCfmI/AAAAAAAABko/2ZuangFrg7sthFZcKI6UJG3jouEhfkVeACLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B4.58.15%2BPM.png"
-    imageanchor="1"><img border="0"
-        src="https://2.bp.blogspot.com/-5Va-I-IvZJg/Xn6TMCDCfmI/AAAAAAAABko/2ZuangFrg7sthFZcKI6UJG3jouEhfkVeACLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B4.58.15%2BPM.png"
-        data-original-width="1600" data-original-height="652" width="700" /></a><br />So, to handle Teams themes
+well:<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2020/teams-dark-panel.png" /><br />So, to handle Teams themes
 correctly we'll need:<br />
 <ul>
     <li>Handle our own components' styles</li>
@@ -128,11 +114,7 @@ next values in the Generator:<br />
     <li><b>Primary theme color:</b> #6264a7</li>
     <li><b>Body text color:</b> #252423</li>
     <li><b>Body background color:</b> #F3F2F1</li>
-</ul>And now in the Designer we have all the theme variables assigned:<br /><a
-    href="https://2.bp.blogspot.com/-7fmMbaQlorU/Xn6a-wH2tJI/AAAAAAAABk0/ldwlWArdeuQV0wKwecIQmVEcAGY9uzU0gCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B5.31.36%2BPM.png"
-    imageanchor="1"><img border="0"
-        src="https://2.bp.blogspot.com/-7fmMbaQlorU/Xn6a-wH2tJI/AAAAAAAABk0/ldwlWArdeuQV0wKwecIQmVEcAGY9uzU0gCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B5.31.36%2BPM.png"
-        data-original-width="1600" data-original-height="1399" width="700" /></a><br />Store generated variables for
+</ul>And now in the Designer we have all the theme variables assigned:<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2020/sp-theme-generator.png" /><br />Store generated variables for
 future use.<br />And let's do the same for dark and contrast.<br /><br />Dark: <ul>
     <li><b>Primary theme color:</b> #6264a7</li>
     <li><b>Body text color:</b> #ffffff</li>
@@ -195,11 +177,7 @@ $contrast-firstComponentButton-color: #000000;
 {% endhighlight %}
 </div>
 And let's define all these variables in the separate module <span class="code">_colors.module.scss</span> in <span
-    class="code">common</span>.<br /><a
-    href="https://1.bp.blogspot.com/-N1XMSa5QXXg/Xn6iMaQJ3VI/AAAAAAAABlA/x83dai7OtlYqAFtAK-ZXQHGWKO_AWPzwACLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B6.02.23%2BPM.png"
-    imageanchor="1"><img border="0"
-        src="https://1.bp.blogspot.com/-N1XMSa5QXXg/Xn6iMaQJ3VI/AAAAAAAABlA/x83dai7OtlYqAFtAK-ZXQHGWKO_AWPzwACLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-27%2Bat%2B6.02.23%2BPM.png"
-        data-original-width="612" data-original-height="312" width="700" /></a><br />Now we can reference this file in
+    class="code">common</span>.<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2020/colors-module.png" /><br />Now we can reference this file in
 any of our components. <br /><br />
 <h2>4. Override Styles for Your Custom Components</h2>Now, when we have global data attribute set and variables for all
 the themes we can override styles for our custom components for each theme. And they will be automatically applied as
@@ -255,21 +233,9 @@ we'll have:
 {% endhighlight %}
 </div>
 So, here we still use site theme if the web part is rendered in SharePoint. But we also have different colors for
-different themes in Microsoft Teams.<br />And now our component looks much better in Teams:<br /><a
-    href="https://2.bp.blogspot.com/-Z1it88Zctp4/Xn-6gRRKTjI/AAAAAAAABlM/NMUNm5grOgYz8BM54lUKmcS4TjSWHEDjQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-28%2Bat%2B1.55.02%2BPM.png"
-    imageanchor="1"><img border="0"
-        src="https://2.bp.blogspot.com/-Z1it88Zctp4/Xn-6gRRKTjI/AAAAAAAABlM/NMUNm5grOgYz8BM54lUKmcS4TjSWHEDjQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-28%2Bat%2B1.55.02%2BPM.png"
-        data-original-width="1020" data-original-height="524" width="700" /></a><br /><a
-    href="https://1.bp.blogspot.com/-2Cb1BsogpXE/Xn-6nNnQU2I/AAAAAAAABlQ/HkmiPHo5KwgLP0orxI6I-ns60hm5IAV3ACLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-28%2Bat%2B1.54.47%2BPM.png"
-    imageanchor="1"><img border="0"
-        src="https://1.bp.blogspot.com/-2Cb1BsogpXE/Xn-6nNnQU2I/AAAAAAAABlQ/HkmiPHo5KwgLP0orxI6I-ns60hm5IAV3ACLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-28%2Bat%2B1.54.47%2BPM.png"
-        data-original-width="1392" data-original-height="618" width="700" /></a><br /><br />
+different themes in Microsoft Teams.<br />And now our component looks much better in Teams:<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2020/teams-default.png" /><br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2020/teams-dark-custom.png" /><br /><br />
 <h2>5. Override Global Office UI Fabric Styles</h2>So, custom components now look good in Teams. But if you use Office
-UI Fabric (OUIFR) components - they still don't respect Teams themes.<br /><a
-    href="https://3.bp.blogspot.com/-3egOsjGiFfk/Xn-7YCdnVuI/AAAAAAAABlg/DMtXQYsyWl0S4jzRvYmvw1BoJUIUNWfcQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-28%2Bat%2B2.02.04%2BPM.png"
-    imageanchor="1"><img border="0"
-        src="https://3.bp.blogspot.com/-3egOsjGiFfk/Xn-7YCdnVuI/AAAAAAAABlg/DMtXQYsyWl0S4jzRvYmvw1BoJUIUNWfcQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-28%2Bat%2B2.02.04%2BPM.png"
-        data-original-width="1600" data-original-height="754" width="700" /></a><br />To override all the styles
+UI Fabric (OUIFR) components - they still don't respect Teams themes.<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2020/teams-dark-custom-white-panel.png" /><br />To override all the styles
 correctly, you'll need to figure out what OUIFR components are used and what classes they have.<br />For example, we use
 <span class="code">Panel</span> component. This component use such classes as <span class="code">ms-Layer, ms-Panel,
     ms-Overlay</span> and so on.<br />Next step is to analyze DOM element with which class sets applies color styles
@@ -406,17 +372,9 @@ And in the root component:<br />
 @import '../../../common/Global.contrast.module.scss';
 {% endhighlight %}
 </div>
-Now the Panel has correct colors as well:<br /><a
-    href="https://2.bp.blogspot.com/-jwKGTDQfxbo/Xn_FkPW_ubI/AAAAAAAABl8/yPYm3m64it4IL1W2boduZ__FdwwfSlJ8wCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-28%2Bat%2B2.45.29%2BPM.png"
-    imageanchor="1"><img border="0"
-        src="https://2.bp.blogspot.com/-jwKGTDQfxbo/Xn_FkPW_ubI/AAAAAAAABl8/yPYm3m64it4IL1W2boduZ__FdwwfSlJ8wCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-28%2Bat%2B2.45.29%2BPM.png"
-        data-original-width="1422" data-original-height="702" width="700" /></a><br />
+Now the Panel has correct colors as well:<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2020/teams-dark-final.png" /><br />
 <h2>6. Don't Forget About Web Part Property Pane!</h2>One component that still looks ugly is Web Part Property
-Pane<br /><a
-    href="https://3.bp.blogspot.com/-kXGTD6MziXo/Xn_F9OcQ_zI/AAAAAAAABmE/3ORncDZfhtkWOixZDkrB7CzATgnnn-AMQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-28%2Bat%2B2.47.02%2BPM.png"
-    imageanchor="1"><img border="0"
-        src="https://3.bp.blogspot.com/-kXGTD6MziXo/Xn_F9OcQ_zI/AAAAAAAABmE/3ORncDZfhtkWOixZDkrB7CzATgnnn-AMQCLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-28%2Bat%2B2.47.02%2BPM.png"
-        data-original-width="1600" data-original-height="674" width="700" /></a><br />And, unfortunately, it doesn't
+Pane<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2020/teams-prop-pane-ugly.png" /><br />And, unfortunately, it doesn't
 have any global classes we can override. Only <span class="code">.spPropertyPaneContainer</span>.<br />But of course we
 can use other CSS selectors.<br />Again, let's define all the colors first in our <span
     class="code">_colors.module.scss</span>:
@@ -572,11 +530,8 @@ And now let's add overrides to <span class="code">Global.default.module.scss, Gl
 }
 {% endhighlight %}
 </div>
-<br />Yay! Now all the parts of our web part look amazing:<br /><a
-    href="https://3.bp.blogspot.com/-QGO4jWFoGF8/XoD3dtKfnlI/AAAAAAAABm8/5uk94NH1JxIRo-p5wIvi7Q-Px7wLCN2OACLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-29%2Bat%2B12.30.30%2BPM.png"
-    imageanchor="1"><img border="0"
-        src="https://3.bp.blogspot.com/-QGO4jWFoGF8/XoD3dtKfnlI/AAAAAAAABm8/5uk94NH1JxIRo-p5wIvi7Q-Px7wLCN2OACLcBGAsYHQ/s1600/Screen%2BShot%2B2020-03-29%2Bat%2B12.30.30%2BPM.png"
-        data-original-width="1600" data-original-height="670" width="700" /></a><br /><br />
+<br />Yay! Now all the parts of our web part look amazing:<br /><img border="0"
+        src="{{site.baseurl}}/assets/images/posts/2020/teams-prop-pane.png" /><br /><br />
 <h2>Conclusion</h2>As you can see it takes time to support MS Teams team in your SharePoint Framework web part. Even if
 you have a single component in there. Imagine how long it will take to add support for 50 components.<br />So, I would
 recommend to add support in the moment when you develop each component. It will be much easier and not so painful.
