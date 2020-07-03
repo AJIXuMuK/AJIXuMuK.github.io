@@ -7,6 +7,11 @@
         <h2 class="post-title">
             <a href="{{ post.url | absolute_url }}" rel="bookmark">{{ post.title }}</a>
         </h2>
+        {% if post.featured_image_thumbnail %}
+        <div class="post-thumbnail">
+            <img src="{{ site.baseurl }}/{{ post.featured_image_thumbnail }}" alt="{{ post.title }}">
+        </div>
+        {% endif %}
     </header><!-- .post-header -->
     <div class="post-content">
         <p>{{ post.excerpt | strip_html | truncatewords:40 }} </p>
