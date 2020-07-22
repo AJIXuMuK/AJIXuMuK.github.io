@@ -15,8 +15,8 @@ tags:
   - SharePoint Framework
   - Teams
   - Personal App
+featured_image_thumbnail: assets/images/posts/2020/teams-personal-app-settings.png
 featured_image: assets/images/posts/2020/teams-personal-app-settings.png
-fearured_image_thumbnail: assets/images/posts/2020/teams-personal-app-settings.png
 ---
 Teams Personal Apps, or Personal Tabs don't have settings. It means that by default Personal Apps show similar content for all users. The only dynamic to change the content of a tab is the current user.
 For SharePoint Framework Personal App (Web Part) it means a few things:
