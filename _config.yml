@@ -51,6 +51,9 @@ plugins_dir:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+plugins:
+  - jekyll-sitemap
+
 # Pagination
 paginate: 10
 paginate_path: /page:num/
