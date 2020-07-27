@@ -53,6 +53,7 @@ plugins_dir:
 
 plugins:
   - jekyll-sitemap
+  - jekyll-seo-tag
 
 # Pagination
 paginate: 10
