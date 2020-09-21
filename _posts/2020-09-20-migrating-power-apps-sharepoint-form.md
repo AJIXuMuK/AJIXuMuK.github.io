@@ -6,6 +6,7 @@ slug: migrating-power-apps-sharepoint-list-form
 date: 2020-09-20T18:36:24.391Z
 tags:
     - Power Apps
+    - PowerApps
     - M365
     - Microsoft
     - Microsoft 365
@@ -15,6 +16,8 @@ tags:
     - SharePoint
     - SharePoint Online
     - Forms
+    - PowerPlatform
+    - Power Platform
 featured_image: assets/images/posts/2020/2020-09-20-featured.png
 featured_image_thumbnail: assets/images/posts/2020/2020-09-20-featured.png
 ---
