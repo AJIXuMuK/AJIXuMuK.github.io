@@ -23,7 +23,7 @@ tags:
 featured_image: assets/images/posts/2020/2020-10-01-nacs-1.png
 featured_image_thumbnail: assets/images/posts/2020/2020-10-01-nacs-1.png
 ---
-This week I attended the first in-person (or, better say, hybrid) conference in the "pandemic", or recovering world - [North American Collaboration Summit](https://www.collabsummit.org/). I was presenting 2 sessions: Developing React Templates using SharePoint Framework Library Components, and SharePoint Framework Connected Web Parts. In this post I want to share a subjective experience of travel, hotel stay, and event itself.
+This week I attended the first in-person (or, better say, hybrid) conference in the "pandemic", or recovering world - [North American Collaboration Summit](https://www.collabsummit.org/). I was presenting 2 sessions: Developing React Templates using SharePoint Framework Library Components, and SharePoint Framework Connected Web Parts. In this post I want to share a subjective experience of travel, hotel stay, and event itself. To dot the "I's" - I believe that COVID-19 is a huge thing with unpredicted effects for me and my family.
 <br />
 But, first of all, I want to say thank you to Mark Rackley for organizing the event, even in this weird time. To my mind, he and the team did a great job and overall experience was great!
 <br />
