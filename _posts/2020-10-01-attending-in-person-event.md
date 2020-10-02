@@ -73,7 +73,7 @@ I don't know the exact number of attendees, both in-person and online. But I wou
 As most of the attendees were either local, or from nearby states, where COVID impact is not huge, they were not so strict about the masks and social distancing. Due to low in-person attendance, it's still OK, but I needed some time to get used to it.<br />
 We also had 4 physical sponsor booths. Honestly, I was not expecting physical booths at all.
 ## Some Conclusions
-It was a great experience to feel how the world is trying to recover, changing "the normal". And I really happy to be an in-person speaker, and see people from community the first time this year...<br />
+It was a great experience to feel how the world is trying to recover, changing "the normal". And I really happy to be an in-person speaker, and see people from community the first time this year.<br />
 From travel perspective - everything seems pretty safe. Again, I had some subjective feelings about the flights, but I can't describe it in words or find specific reasons for that.<br />
 From hotel stay and dining perspective - everything depends on state or country. In California the rules are more strict, here in Missouri - many restrictions are lifted as there are not so many COVID-19 cases.<br />
 From the event perspective... Our company often sponsors events. I'm attending events both as a speaker and as an attendee.<br />
