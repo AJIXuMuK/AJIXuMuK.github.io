@@ -32,7 +32,8 @@ I had a flight from Burbank to Springfield with one stop in Dallas by American A
 ### Airports
 ![Burbank Airport, source: https://latimes.com](./assets/images/posts/2020/2020-10-01-burbank-airport.jpg)<br />
 All three airports look clean and "sanitized". I could even smell the sanitizer here and there. All people were wearing masks, except of those who were eating/drinking in cafes/restaurants. Sanitizing stations are located everywhere: near seats, restrooms, cafes, etc.<br />
-And, as currently, there are not so many passengers, it was pretty easy to practice social distancing.
+And, as currently, there are not so many passengers, it was pretty easy to practice social distancing.<br />
+The only concerning aspect - I didn't notice temperature checks.
 ### Flights
 ![American Airlines, image source: https://aa.com](./assets/images/posts/2020/2020-10-01-aa.png)<br />
 For the first leg (Burbank - Dallas) the aircraft was Boeing 737-800 - 3 rows of seats each side.<br />
@@ -40,7 +41,8 @@ The middle row of the seats was left empty. I don't know if it's a general pract
 All passenger and personnel were wearing masks during the whole flight. Of course you could take off your mask to drink water. But other than that - masks are mandatory.<br />
 Regarding the water and service onboard. There were no way to purchase something, but each passenger got a bottle of water, a cookie and a desinfecting napkin in a zip-bag while loading the aircraft.<br />
 The second leg (Dallas - Springfield) was a regional flight on Embraer ERJ-145. This aircraft has 2 rows one side and single row other side. I was happy to book a single row sit and had a distance to any other passengers.<br />
-Again, all passengers and crew were wearing masks.<br >
+Again, all passengers and crew were wearing masks.<br />
+And again - no temperature checks prior or during the boarding.<br />
 Subjectively, I was expecting something more from the flights during the pandemic. I can't say what exactly, but overall feeling was - there should be something to feel completely safe. Maybe it's just me.
 ### Rides
 ![Uber, image source: https://www.hurriyetdailynews.com/](./assets/images/posts/2020/2020-10-01-uber.jpg)<br />
@@ -85,7 +87,8 @@ By the way, we had a great fun in the Silver Dollar City amusement park =).
 <br />
 I want to say thank you to Mark again, to the whole NACS committee. It was the best it could be!<br />
 I also want to say thank you to the sponsors, in-person and online! They helped to make this event happen!<br />
-And thank you to all attendees! Hope you enjoyed the experience and gained valuable knowledge!
+And thank you to all attendees! Hope you enjoyed the experience and gained valuable knowledge!<br />
+P.S. During the visit I used Lyft 4 times. And all the rides with the same driver - Nettie. She is a great woman! So, if you're in the area, and got Lyft with Nettie - tip her!
 
 <br />
 That's all for today!<br />
