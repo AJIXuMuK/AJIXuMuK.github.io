@@ -81,6 +81,7 @@ I would say that from sponsorship perspective events are currently half dead. Pr
 As an attendee - I don't see a reason to attend in-person. I can join my favorite chair at home while gathering knowledge. As attendance is low - networking part of the event (the major reason to attend in-person) is low.<br />
 As a speaker - I do like in-person events. I want to see people, not to "talk to the wall". But if the attendance is low, and you're not comfortable with risks you have - in current situation it probably doesn't worth it.<br />
 I really hope the things will get better soon and we'll be enjoying in-person events, networking and fun again soon!<br />
+By the way, we had a great fun in the Silver Dollar City amusement park =).
 <br />
 I want to say thank you to Mark again, to the whole NACS committee. It was the best it could be!<br />
 I also want to say thank you to the sponsors, in-person and online! They helped to make this event happen!<br />
