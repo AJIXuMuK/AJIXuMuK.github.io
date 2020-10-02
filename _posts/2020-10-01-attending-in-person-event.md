@@ -71,7 +71,7 @@ Capacity of the sessions' rooms was limited. For example, for breakout sessions 
 This is the most interesting part as it kind of shows the state of the world right now...<br />
 I don't know the exact number of attendees, both in-person and online. But I would say we had maximum 50 people on-site, or even less. And we definitely had more online attendees. My sessions had only 3 and 4 in-person attendees. Hopefuly, it's not because I'm just boring :).<br />
 As most of the attendees were either local, or from nearby states, where COVID impact is not huge, they were not so strict about the masks and social distancing. Due to low in-person attendance, it's still OK, but I needed some time to get used to it.<br />
-We also had 4 physical sponsor booths. Honestly, I was not expecting physical boots at all.
+We also had 4 physical sponsor booths. Honestly, I was not expecting physical booths at all.
 ## Some Conclusions
 It was a great experience to feel how the world is trying to recover, changing "the normal". And I really happy to be an in-person speaker, and see people from community the first time this year...<br />
 From travel perspective - everything seems pretty safe. Again, I had some subjective feelings about the flights, but I can't describe it in words or find specific reasons for that.<br />
