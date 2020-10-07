@@ -32,6 +32,7 @@ But, first of all, I want to say thank you to Mark Rackley for organizing the ev
 If you are interested in learning how the hybrid event has been organized - read [The Hybrid Community Conference Manifesto](http://www.markrackley.net/2020/10/06/the-hybrid-community-conference-manifesto/) by Mark Rackley.
 ***
 <br />
+
 ## Travel
 I had a flight from Burbank to Springfield with one stop in Dallas by American Airlines.<br />
 ### Airports
