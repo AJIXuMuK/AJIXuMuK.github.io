@@ -28,7 +28,9 @@ This week I attended the first in-person (or, better say, hybrid) conference in 
 But, first of all, I want to say thank you to Mark Rackley for organizing the event, even in this weird time. To my mind, he and the team did a great job and overall experience was great!
 <br />
 <br />
->If you are interested in learning how the hybrid event has been organized - read [The Hybrid Community Conference Manifesto](http://www.markrackley.net/2020/10/06/the-hybrid-community-conference-manifesto/) by Mark Rackley.
+***
+If you are interested in learning how the hybrid event has been organized - read [The Hybrid Community Conference Manifesto](http://www.markrackley.net/2020/10/06/the-hybrid-community-conference-manifesto/) by Mark Rackley.
+***
 <br />
 ## Travel
 I had a flight from Burbank to Springfield with one stop in Dallas by American Airlines.<br />
