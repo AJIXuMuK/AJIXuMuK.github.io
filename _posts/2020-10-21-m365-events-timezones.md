@@ -26,9 +26,7 @@ featured_image: assets/images/posts/2020/2020-10-21-time-zones.jpg
 featured_image_thumbnail: assets/images/posts/2020/2020-10-21-time-zones.jpg
 ---
 Working with time zones is always difficult. Not only in SharePoint or Microsoft 365, but probably in any platform or application. In this post I want to overview how Outlook and SharePoint events dates are displayed in different Microsoft 365 applications based on different configurations available to the user.
-<br />
-<br />
-<h2>SharePoint Events</h2>
+## SharePoint Events
 Let's start with SharePoint events.<br />
 There are 2 configurations that affect on how the event date/time is displayed to the user. Or, to be more specific, in what time zone the event date will be displayed.<br />
 The first configuration is **site Regional Settings** that you can access in Site Settings -> Regional Settings:<br />
@@ -38,14 +36,14 @@ But user can additionally set regional settings for himself. This is done in use
 ![Office profile](./assets/images/posts/2020/2020-10-21-office-profile.png)<br />
 If this configuration is set, a user will see the events dates in the same time zone on any SharePoint site.<br />
 Good thing about SharePoint events - they will be displayed in the same time zone/format both in SharePoint and Microsoft Teams. So, the only possible confusion is where this time zone configuration comes from :)<br />
-<h2>Outlook Events</h2> 
+## Outlook Events 
 Now Outlook events.<br />
 Outlook events are displayed based on the time zone set in user's **Microsoft Account** that can be accessed using [https://myaccount.microsoft.com](https://myaccount.microsoft.com) url.<br />
 Single configuration, pretty easy, right?..<br />
 But...<br />
 First, Microsoft Account IS NOT EQUAL to Office Profile. It means if you have an app that synchronizes Outlook and SharePoint events, users can see different dates/times in SharePoint and Outlook based on their configurations in Microsoft Account and Office Profile.<br />
 Second, if you look at the event in Microsoft Teams Calendar, you will see the event in the **current** time zone - the time zone of your machine, which can be confusing.
-<h2>Conclusion</h2>
+## Conclusion
 Below is an example for the event that is happening on October 21, 2020 5:00 PM UTC-8.<br />
 My machine's time zone is UTC-8, Office Profile time zone is set to UTC, and Microsoft Account time zone is set to UTC+10:<br />
 ![Different configurations](./assets/images/posts/2020/2020-10-21-outlook-sp-teams.png)<br />
