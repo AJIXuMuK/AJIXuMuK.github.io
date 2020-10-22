@@ -22,7 +22,7 @@ tags:
   - Account
   - Profile
 slug: outlook-sharepoint-events-time-zones-display-dates
-featured_image: assets/images/posts/2020/2020-10-31-time-zones.jpg
+featured_image: assets/images/posts/2020/2020-10-21-time-zones.jpg
 featured_image_thumbnail: assets/images/posts/2020/2020-10-21-time-zones.jpg
 ---
 Working with time zones is always difficult. Not only in SharePoint or Microsoft 365, but probably in any platform or application. In this post I want to overview how Outlook and SharePoint events dates are displayed in different Microsoft 365 applications based on different configurations available to the user.
