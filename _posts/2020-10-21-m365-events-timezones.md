@@ -29,7 +29,7 @@ Working with time zones is always difficult. Not only in SharePoint or Microsoft
 ## SharePoint Events
 Let's start with SharePoint events.<br />
 There are 2 configurations that affect on how the event date/time is displayed to the user. Or, to be more specific, in what time zone the event date will be displayed.<br />
-The first configuration is **site Regional Settings** that you can access in Site Settings -> Regional Settings:<br />
+The first configuration is **Site Regional Settings** that you can access in Site Settings -> Regional Settings:<br />
 ![Site Regional Settings](./assets/images/posts/2020/2020-10-21-site-regional-settings.png)<br />
 In most cases, this is the only configuration set, and all users see events in the same time zone.<br />
 But user can additionally set regional settings for himself. This is done in user's **Office Profile (Delve)**. [Here](https://support.microsoft.com/en-us/office/change-your-personal-language-and-region-settings-caa1fccc-bcdb-42f3-9e5b-45957647ffd7) you can find the documentation how to change the settings. Here is the screenshot of the documentation:<br />
