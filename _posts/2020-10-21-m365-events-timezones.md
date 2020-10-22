@@ -49,7 +49,7 @@ My machine's time zone is UTC-8, Office Profile time zone is set to UTC, and Mic
 ![Different configurations](./assets/images/posts/2020/2020-10-21-outlook-sp-teams.png)<br />
 And here is a small summary table for the configurations and display results<br />
 | Source  | Possible Configurations | Time Zone in SP | Time Zone in Outlook | Time Zone in Teams |
-| ------- | ----------------------- | --------------- | -------------------- | ------------------ |
+|-------|-----------------------|---------------|--------------------|------------------|
 | Outlook | [Microsoft Account](https://myaccount.microsoft.com) | N/A | Set in Microsoft Account | Current machine's time zone |
 | SharePoint | Site Regional Settings <br />[Office Profile](https://support.microsoft.com/en-us/office/change-your-personal-language-and-region-settings-caa1fccc-bcdb-42f3-9e5b-45957647ffd7) | Office Profile time zone, if set; Site time zone otherwise | N/A | Office Profile time zone, if set; Site time zone otherwise |
 Hope, this information helps you and your users to resolve the confusions.
