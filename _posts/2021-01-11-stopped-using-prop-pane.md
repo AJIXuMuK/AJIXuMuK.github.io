@@ -19,8 +19,8 @@ tags:
   - SharePoint Framework Property Pane
   - SPFx Property Pane
   - Property Pane
-featured_image: assets/images/posts/2020/2021-01-11-prop-pane.jpg
-featured_image_thumbnail: assets/images/posts/2020/2021-01-11-prop-pane.jpg
+featured_image: assets/images/posts/2021/2021-01-11-prop-pane.png
+featured_image_thumbnail: assets/images/posts/2021/2021-01-11-prop-pane.png
 slug: stopped-sharepoint-framework-property-pane
 date: 2021-01-11T22:46:50.539Z
 ---
