@@ -1,27 +1,27 @@
 ---
 layout: post
-title: 'Using Vue.js in SharePoint Framework Applications. Part II: Default SPFx web
-  part using Vue.js'
+title: 'Using Vue.js in SharePoint Framework Applications. Part II: Default SPFx web part using Vue.js'
 date: '2018-05-16T22:30:00.001-07:00'
 author: Alex Terentiev
 tags:
-- SharePoint Online
-- Client Side Web Part
-- SPFx
-- Vuejs
-- Client Web Part
-- Vue
-- Gulp
-- O365
-- SharePoint Framework
-- Office 365
-- SharePoint
+    - SharePoint Online
+    - Client Side Web Part
+    - SPFx
+    - Vuejs
+    - Client Web Part
+    - Vue
+    - Gulp
+    - O365
+    - SharePoint Framework
+    - Office 365
+    - SharePoint
 modified_time: '2018-10-07T11:58:08.955-07:00'
-blogger_id: tag:blogger.com,1999:blog-3066084330774405472.post-2401117063856284271
-blogger_orig_url: http://blog.aterentiev.com/2018/05/using-vuejs-in-sharepoint-framework.html
+blogger_id: 'tag:blogger.com,1999:blog-3066084330774405472.post-2401117063856284271'
+blogger_orig_url: 'http://blog.aterentiev.com/2018/05/using-vuejs-in-sharepoint-framework.html'
+slug: vue-js-spfx-default-web-part
 ---
 
-This is the second post about SharePoint Framework and Vue.js. In this post I'm going to implement basic Client-Side Web Part using Vue.js - basically, "wrap" the markup from Web Part template project with Vue.js  component.<br />List of posts:<br /><ol><li><a href="http://blog.aterentiev.com/using-vuejs-in-sharepoint-framework" target="_blank">Whats and Whys</a></li><li>Default SPFx web part using Vue.js (this post)</li><li><a href="http://blog.aterentiev.com/using-vuejs-in-sharepoint-framework" target="_blank"> Yeoman Generator with Vue Support</a></li><li><a href="http://blog.aterentiev.com/using-vuejs-in-sharepoint-framework">Web Part Property Pane Control</a></li><li><a href="http://blog.aterentiev.com/using-vuejs-in-sharepoint-framework_17" target="_blank">Use React Components inside Vue.js Solution</a></li></ol><a name='more'></a>In the first post we went through the basic configuration of a project to use both TypeScript and Vue.js.<br />Now let's go further and include Vue.js in SharePoint Framework project<br /><h2>1. Scaffolding</h2>So, the first thing we should do, as with any other SPFx project, is to "scaffold" it from the template how it is described <a href="https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/build-a-hello-world-web-part#create-a-new-web-part-project" target="_blank">here</a><br />This will create a basic project with a markup implemented using HTML with no framework used.<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2018/html-web-part.png" /><br />Now we have a SPFx project prepared and the goal is to replace the HTML markup with a Vue component. <br /><h2>2. Including Vue into the Project</h2>I'm going to implement a web part as a Single File Component (SFC) with a help of <a href="https://github.com/vuejs/vue-class-component" target="_blank">vue-class-component</a>. This is one of two available options how to implement an SFC using Vue.js. Another one is to use <span class="code">Vue.extend</span> which is more "classic" way for Vue developers. But <span class="code">vue-class-component</span> is more similar to SPFx development itself. So, as mentioned, I'll use this one.<br />First of all, we need to install <span class="code">vue</span> module as we did in the first post: <br />
+This is the second post about SharePoint Framework and Vue.js. In this post I'm going to implement basic Client-Side Web Part using Vue.js - basically, "wrap" the markup from Web Part template project with Vue.js  component.<br />List of posts:<br /><ol><li><a href="/vue-js-spfx-whats-whys" target="_blank">Whats and Whys</a></li><li>Default SPFx web part using Vue.js (this post)</li><li><a href="/vue-js-spfx-yeoman-generator" target="_blank"> Yeoman Generator with Vue Support</a></li><li><a href="/vue-js-spfx-prop-pane-control">Web Part Property Pane Control</a></li><li><a href="/vue-js-spfx-react-in-vue-js-solution" target="_blank">Use React Components inside Vue.js Solution</a></li></ol><a name='more'></a>In the first post we went through the basic configuration of a project to use both TypeScript and Vue.js.<br />Now let's go further and include Vue.js in SharePoint Framework project<br /><h2>1. Scaffolding</h2>So, the first thing we should do, as with any other SPFx project, is to "scaffold" it from the template how it is described <a href="https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/build-a-hello-world-web-part#create-a-new-web-part-project" target="_blank">here</a><br />This will create a basic project with a markup implemented using HTML with no framework used.<br /><img border="0" src="{{site.baseurl}}/assets/images/posts/2018/html-web-part.png" /><br />Now we have a SPFx project prepared and the goal is to replace the HTML markup with a Vue component. <br /><h2>2. Including Vue into the Project</h2>I'm going to implement a web part as a Single File Component (SFC) with a help of <a href="https://github.com/vuejs/vue-class-component" target="_blank">vue-class-component</a>. This is one of two available options how to implement an SFC using Vue.js. Another one is to use <span class="code">Vue.extend</span> which is more "classic" way for Vue developers. But <span class="code">vue-class-component</span> is more similar to SPFx development itself. So, as mentioned, I'll use this one.<br />First of all, we need to install <span class="code">vue</span> module as we did in the first post: <br />
 <div markdown="1">
 {% highlight console %}
 npm i --save vue

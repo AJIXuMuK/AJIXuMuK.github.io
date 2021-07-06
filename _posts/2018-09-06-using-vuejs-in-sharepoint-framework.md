@@ -1,27 +1,27 @@
 ---
 layout: post
-title: 'Using Vue.js in SharePoint Framework Applications. Part IV: Web Part Property
-  Pane Control'
+title: 'Using Vue.js in SharePoint Framework Applications. Part IV: Web Part Property Pane Control'
 date: '2018-09-06T21:32:00.000-07:00'
 author: Alex Terentiev
 tags:
-- SharePoint Online
-- Client Side Web Part
-- SPFx
-- Vuejs
-- Vue
-- yo
-- Yeoman
-- generator-sharepoint
-- O365
-- SharePoint Framework
-- Office 365
+    - SharePoint Online
+    - Client Side Web Part
+    - SPFx
+    - Vuejs
+    - Vue
+    - yo
+    - Yeoman
+    - generator-sharepoint
+    - O365
+    - SharePoint Framework
+    - Office 365
 modified_time: '2018-10-07T12:14:28.295-07:00'
-blogger_id: tag:blogger.com,1999:blog-3066084330774405472.post-6247888011485655552
-blogger_orig_url: http://blog.aterentiev.com/2018/09/using-vuejs-in-sharepoint-framework.html
+blogger_id: 'tag:blogger.com,1999:blog-3066084330774405472.post-6247888011485655552'
+blogger_orig_url: 'http://blog.aterentiev.com/2018/09/using-vuejs-in-sharepoint-framework.html'
+slug: vue-js-spfx-prop-pane-control
 ---
 
-This is the fourth post about SharePoint Framework and Vue.js. In this post I want to go through the process of creation custom Property Pane control using Vue.js.<br /><br />List of posts:<br /><ol><li><a href="http://blog.aterentiev.com/using-vuejs-in-sharepoint-framework" target="_blank">Whats and Whys</a></li><li><a href="http://blog.aterentiev.com/using-vuejs-in-sharepoint-framework" target="_blank">Default SPFx web part using Vue.js</a></li><li><a href="http://blog.aterentiev.com/using-vuejs-in-sharepoint-framework" target="_blank">Yeoman generator with Vue support</a></li><li>Web Part Property Pane Control (this post)</li><li><a href="http://blog.aterentiev.com/using-vuejs-in-sharepoint-framework_17" target="_blank">Use React Components inside Vue.js Solution</a></li></ol><b>Code: </b><a href="https://github.com/AJIXuMuK/vuejs/tree/master/proppane-control" target="_blank">https://github.com/AJIXuMuK/vuejs/tree/master/proppane-control</a>.<br /><a name='more'></a>In previous posts we discussed what steps are needed to make Vue.js work in SPFx projects and how to use Vue.js Single File Components inside SharePoint Framework Web Parts and Extensions.<br />I've also mentioned <a href="https://www.npmjs.com/package/generator-vuespfx" target="_blank">Yeoman VueSpfx generator</a> that does all needed configurations.<br />In the current post I want to discuss how to create custom controls for Web Part Property Pane.<br /><h2>Files and Structure</h2>If you look at <a href="https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/guidance/build-custom-property-pane-controls" target="_blank">official documentation</a> and <a href="https://github.com/SharePoint/sp-dev-fx-property-controls" target="_blank">Reusable SPFx Property Pane Controls repo</a> you'll notice that there is a "best practice" on how to structure files and code of custom controls for property pane when you're going to use some JavaScript framework.<br /><b>Note: I'm using "component" and "control" terms here. The "control" is for property pane custom control that we're creating. The "component" is for framework-specific implementation of the control.</b><br />Let's say you want to create new <span class="code">ImageUrl</span> control which is a simple input (text box). In that case the file structure and contents will look like that: <ol><li><span class="code">IPropertyFieldImageUrl.ts</span> - file to contain custom control properties interface ("public" properties) that will be passed from the web part. This file also usually contains "internal" properties interface that extends "public" properties with <span class="code">IPropertyPaneCustomFieldProps</span> interface.<br />"Public" properties interface usually contains: <ul><li><span class="code">key</span> - a UNIQUE key indicates the identity of this control.</li><li><span class="code">properties</span> - parent Web Part properties</li><li><span class="code">onPropertyChange</span> - defines an onPropertyChange function to raise when the selected value changes. Normally this function must be defined with the 'this.onPropertyChange' method of the web part object.</li></ul>The "template" for the file looks like that: 
+This is the fourth post about SharePoint Framework and Vue.js. In this post I want to go through the process of creation custom Property Pane control using Vue.js.<br /><br />List of posts:<br /><ol><li><a href="/vue-js-spfx-whats-whys" target="_blank">Whats and Whys</a></li><li><a href="/vue-js-spfx-default-web-part" target="_blank">Default SPFx web part using Vue.js</a></li><li><a href="/vue-js-spfx-yeoman-generator" target="_blank">Yeoman generator with Vue support</a></li><li>Web Part Property Pane Control (this post)</li><li><a href="/vue-js-spfx-react-in-vue-js-solution" target="_blank">Use React Components inside Vue.js Solution</a></li></ol><b>Code: </b><a href="https://github.com/AJIXuMuK/vuejs/tree/master/proppane-control" target="_blank">https://github.com/AJIXuMuK/vuejs/tree/master/proppane-control</a>.<br /><a name='more'></a>In previous posts we discussed what steps are needed to make Vue.js work in SPFx projects and how to use Vue.js Single File Components inside SharePoint Framework Web Parts and Extensions.<br />I've also mentioned <a href="https://www.npmjs.com/package/generator-vuespfx" target="_blank">Yeoman VueSpfx generator</a> that does all needed configurations.<br />In the current post I want to discuss how to create custom controls for Web Part Property Pane.<br /><h2>Files and Structure</h2>If you look at <a href="https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/guidance/build-custom-property-pane-controls" target="_blank">official documentation</a> and <a href="https://github.com/SharePoint/sp-dev-fx-property-controls" target="_blank">Reusable SPFx Property Pane Controls repo</a> you'll notice that there is a "best practice" on how to structure files and code of custom controls for property pane when you're going to use some JavaScript framework.<br /><b>Note: I'm using "component" and "control" terms here. The "control" is for property pane custom control that we're creating. The "component" is for framework-specific implementation of the control.</b><br />Let's say you want to create new <span class="code">ImageUrl</span> control which is a simple input (text box). In that case the file structure and contents will look like that: <ol><li><span class="code">IPropertyFieldImageUrl.ts</span> - file to contain custom control properties interface ("public" properties) that will be passed from the web part. This file also usually contains "internal" properties interface that extends "public" properties with <span class="code">IPropertyPaneCustomFieldProps</span> interface.<br />"Public" properties interface usually contains: <ul><li><span class="code">key</span> - a UNIQUE key indicates the identity of this control.</li><li><span class="code">properties</span> - parent Web Part properties</li><li><span class="code">onPropertyChange</span> - defines an onPropertyChange function to raise when the selected value changes. Normally this function must be defined with the 'this.onPropertyChange' method of the web part object.</li></ul>The "template" for the file looks like that: 
 <div markdown="1">
 {% highlight typescript %}
 

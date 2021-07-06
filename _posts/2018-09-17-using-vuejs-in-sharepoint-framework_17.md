@@ -1,31 +1,31 @@
 ---
 layout: post
-title: 'Using Vue.js in SharePoint Framework Applications. Part V: Use React Components
-  inside Vue.js Solution'
+title: 'Using Vue.js in SharePoint Framework Applications. Part V: Use React Components inside Vue.js Solution'
 date: '2018-09-17T16:40:00.001-07:00'
 author: Alex Terentiev
 tags:
-- Office UI Fabric
-- SharePoint Online
-- Vuejs
-- SharePoint Framework
-- Office 365
-- PnP
-- SharePoint
-- Client Side Web Part
-- Client Web Part
-- TypeScript
-- Vue
-- React
-- generator-sharepoint
-- O365
-- Modern UI
+    - Office UI Fabric
+    - SharePoint Online
+    - Vuejs
+    - SharePoint Framework
+    - Office 365
+    - PnP
+    - SharePoint
+    - Client Side Web Part
+    - Client Web Part
+    - TypeScript
+    - Vue
+    - React
+    - generator-sharepoint
+    - O365
+    - Modern UI
 modified_time: '2018-09-17T16:42:36.032-07:00'
-blogger_id: tag:blogger.com,1999:blog-3066084330774405472.post-1964505514297976569
-blogger_orig_url: http://blog.aterentiev.com/2018/09/using-vuejs-in-sharepoint-framework_17.html
+blogger_id: 'tag:blogger.com,1999:blog-3066084330774405472.post-1964505514297976569'
+blogger_orig_url: 'http://blog.aterentiev.com/2018/09/using-vuejs-in-sharepoint-framework_17.html'
+slug: vue-js-spfx-react-in-vue-js-solution
 ---
 
-This is the fifth post about SharePoint Framework and Vue.js. In this post I want to show how to use React components inside Vue.js-based SharePoint Framework solutions.<br /><br />List of posts:<br /><ol><li><a href="http://blog.aterentiev.com/using-vuejs-in-sharepoint-framework" target="_blank">Whats and Whys</a></li><li><a href="http://blog.aterentiev.com/using-vuejs-in-sharepoint-framework" target="_blank">Default SPFx web part using Vue.js</a></li><li><a href="http://blog.aterentiev.com/using-vuejs-in-sharepoint-framework" target="_blank">Yeoman generator with Vue support</a></li><li><a href="http://blog.aterentiev.com/using-vuejs-in-sharepoint-framework" target="_blank">Web Part Property Pane Control</a></li><li>Use React Components inside Vue.js Solution (this post)</li></ol><b>Code: </b><a href="https://github.com/AJIXuMuK/vuejs/tree/master/react-in-vue" target="_blank">https://github.com/AJIXuMuK/vuejs/tree/master/react-in-vue</a>.<br /><a name='more'></a>In previous posts we discussed practically all the steps and tools that you need to develop SharePoint Framework solution using Vue.js framework.<br />But there is still uncovered question that might impact on developer's decision to use Vue.js in SPFx solution.<br />The question is: Can we and How to use React components inside Vue.js projects?<br />Why should we care about React in Vue? Because Microsoft bets on React and there are a lot of reusable components that simplify SPFx development: <ul><li>There is <a href="https://developer.microsoft.com/en-us/fabric" target="_blank">Office UI Fabric</a> framework to create Office 365-like UI. And it provides React component to reuse</li><li>There are community reusable React components for SPFx solutions: for <a href="https://sharepoint.github.io/sp-dev-fx-property-controls/" target="_blank">Property Panes</a> and <a href="https://sharepoint.github.io/sp-dev-fx-controls-react/" target="_blank">Web Parts/Extensions</a></li></ul>Good news everyone! <b>We can use React components inside Vue.js!</b><br />And it's actually pretty easy to do because there is an open-source project <a href="https://github.com/akxcv/vuera" target="_blank">Vuera</a> that allows you to integrate Vue.js and React.<br />And let's see how we can use it in SPF solution.<br /><h2>Initial Project Configuration</h2>First, let's create our project.<br />I'll be using <a href="https://www.npmjs.com/package/generator-vuespfx" target="_blank">VueSPFx</a> Yeoman generator to provision all Vue.js references that we need automatically.<br />And let's use Web Part as a playground as it's much easier to debug and render components in there. 
+This is the fifth post about SharePoint Framework and Vue.js. In this post I want to show how to use React components inside Vue.js-based SharePoint Framework solutions.<br /><br />List of posts:<br /><ol><li><a href="/vue-js-spfx-whats-whys" target="_blank">Whats and Whys</a></li><li><a href="/vue-js-spfx-default-web-part" target="_blank">Default SPFx web part using Vue.js</a></li><li><a href="/vue-js-spfx-yeoman-generator" target="_blank">Yeoman generator with Vue support</a></li><li><a href="/vue-js-spfx-prop-pane-control" target="_blank">Web Part Property Pane Control</a></li><li>Use React Components inside Vue.js Solution (this post)</li></ol><b>Code: </b><a href="https://github.com/AJIXuMuK/vuejs/tree/master/react-in-vue" target="_blank">https://github.com/AJIXuMuK/vuejs/tree/master/react-in-vue</a>.<br /><a name='more'></a>In previous posts we discussed practically all the steps and tools that you need to develop SharePoint Framework solution using Vue.js framework.<br />But there is still uncovered question that might impact on developer's decision to use Vue.js in SPFx solution.<br />The question is: Can we and How to use React components inside Vue.js projects?<br />Why should we care about React in Vue? Because Microsoft bets on React and there are a lot of reusable components that simplify SPFx development: <ul><li>There is <a href="https://developer.microsoft.com/en-us/fabric" target="_blank">Office UI Fabric</a> framework to create Office 365-like UI. And it provides React component to reuse</li><li>There are community reusable React components for SPFx solutions: for <a href="https://sharepoint.github.io/sp-dev-fx-property-controls/" target="_blank">Property Panes</a> and <a href="https://sharepoint.github.io/sp-dev-fx-controls-react/" target="_blank">Web Parts/Extensions</a></li></ul>Good news everyone! <b>We can use React components inside Vue.js!</b><br />And it's actually pretty easy to do because there is an open-source project <a href="https://github.com/akxcv/vuera" target="_blank">Vuera</a> that allows you to integrate Vue.js and React.<br />And let's see how we can use it in SPF solution.<br /><h2>Initial Project Configuration</h2>First, let's create our project.<br />I'll be using <a href="https://www.npmjs.com/package/generator-vuespfx" target="_blank">VueSPFx</a> Yeoman generator to provision all Vue.js references that we need automatically.<br />And let's use Web Part as a playground as it's much easier to debug and render components in there. 
 <div markdown="1">
 {% highlight console %}
 
