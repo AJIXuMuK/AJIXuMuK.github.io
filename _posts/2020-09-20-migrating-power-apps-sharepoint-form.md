@@ -28,6 +28,8 @@ In this post I want to describe the steps to export your custom form, even if yo
 If you do have either of these requirements, you'll need to proceed with additional steps.
 But let's start from the beginning.
 
+**[UPDATE] You can use [Flow and Power Apps Migrator](https://github.com/Zerg00s/FlowPowerAppsMigrator) created by [Denis Molodtsov](https://twitter.com/Zerg00s) to simplify the migration.**
+
 ## Export Power Apps App
 After your custom form is ready, you'll need to export it.
 It is done in Power Apps Studio: go to **File -> Save** and click on **See all versions**.
