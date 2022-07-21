@@ -6,12 +6,12 @@ meta_description: 'Jekyll template, minimal style, perfect for bloggers.'
 logo:
 # Author image is used in site sidebar and greetings in the home page hero text
 author_image: 'authorimage.jpg'
-author_greetings: "Hello everyone! My name is Alex Terentiev. I'm an Office Development MVP and a member of Microsoft 365 PnP Team."
+author_greetings: "Hello everyone! My name is Alex Terentiev. I'm a senior developer at Microsoft and a member of Microsoft 365 PnP Team."
 author_name: 'Alex Terentiev'
 author:
   name: 'Alex Terentiev'
   image: 'authorimage.jpg'
-  greetings: "Hello everyone! My name is Alex Terentiev. I'm an Office Development MVP and a member of Microsoft 365 PnP Team."
+  greetings: "Hello everyone! My name is Alex Terentiev. I'm  a senior developer at Microsoft and a member of Microsoft 365 PnP Team."
 favicon: 'assets/images/favicon.ico'
 baseurl: 
 #production_url: https://royce.netlify.com/
